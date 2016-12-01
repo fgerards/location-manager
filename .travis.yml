@@ -29,6 +29,9 @@ before_install:
   - phpenv config-rm xdebug.ini
   - composer self-update
   - composer --version
+  - nvm use v6.7.0
+  - node --version
+  - npm --version
   - npm install
   - ./node_modules/.bin/grunt babel:test
 
