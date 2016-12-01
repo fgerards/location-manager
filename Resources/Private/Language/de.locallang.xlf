@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0">
+    <file source-language="en" target-language="de" datatype="plaintext" product-name="location_manager">
+        <header/>
+        <body>
+            <!--
+              Plugin "Locations"
+            -->
+            <trans-unit id="plugin.locations.sheets.map">
+                <target>Karte</target>
+            </trans-unit>
+            <trans-unit id="plugin.locations.settings.map.center.latitude">
+                <target>Zentrum: Breitengrad</target>
+            </trans-unit>
+            <trans-unit id="plugin.locations.settings.map.center.longitude">
+                <target>Zentrum: Längengrad</target>
+            </trans-unit>
+            <trans-unit id="plugin.locations.settings.map.mapTypeId">
+                <target>Kartentyp</target>
+            </trans-unit>
+            <trans-unit id="plugin.locations.settings.map.mapTypeId.road">
+                <target>Straße</target>
+            </trans-unit>
+            <trans-unit id="plugin.locations.settings.map.mapTypeId.terrain">
+                <target>Terrain</target>
+            </trans-unit>
+            <trans-unit id="plugin.locations.settings.map.mapTypeId.satellite">
+                <target>Satellit</target>
+            </trans-unit>
+            <trans-unit id="plugin.locations.settings.map.mapTypeId.hybrid">
+                <target>Hybrid</target>
+            </trans-unit>
+            <trans-unit id="plugin.locations.settings.map.zoom">
+                <target>Zoom</target>
+            </trans-unit>
+            <trans-unit id="plugin.locations.settings.map.zoomControl">
+                <target>Zoomsteuerung einblenden</target>
+            </trans-unit>
+            <trans-unit id="plugin.locations.settings.map.enableLocking">
+                <target>Versehentliches verschieben des Kartenausschnittes verhindern</target>
+            </trans-unit>
+            <trans-unit id="plugin.locations.settings.map.hideOnMobile">
+                <target>Karte auf mobilen Geräten ausblenden</target>
+            </trans-unit>
+
+            <trans-unit id="plugin.locations.sheets.content">
+                <target>Inhalt</target>
+            </trans-unit>
+            <trans-unit id="plugin.locations.settings.content.fixed">
+                <target>Fixe Standorte (immer Sichtbar)</target>
+            </trans-unit>
+
+
+            <trans-unit id="plugin.locations.sheets.advanced">
+                <target>Fortgeschritten</target>
+            </trans-unit>
+            <trans-unit id="plugin.locations.settings.advanced.style">
+                <target>Benutzerdefiniertes style array</target>
+            </trans-unit>
+            <trans-unit id="plugin.locations.settings.advanced.debug">
+                <target>Debugging modus aktivieren</target>
+            </trans-unit>
+
+            <trans-unit id="plugin.locations.sheets.search">
+                <target>Suche &amp; Filter</target>
+            </trans-unit>
+            <trans-unit id="plugin.locations.settings.search.enable">
+                <target>Suchfeld aktivieren</target>
+            </trans-unit>
+            <trans-unit id="plugin.locations.settings.search.expand">
+                <target>Erweiterung des Suchradius (km)</target>
+            </trans-unit>
+            <trans-unit id="plugin.locations.settings.filter.enable">
+                <target>Kategorienfilter aktivieren</target>
+            </trans-unit>
+            <trans-unit id="plugin.locations.settings.filter.preselect">
+                <target>Filtervorauswahl</target>
+            </trans-unit>
+            <trans-unit id="plugin.locations.settings.filter.combine">
+                <target>Filterkombinationsmethode</target>
+            </trans-unit>
+
+
+            <!--
+              Location model
+            -->
+            <trans-unit id="model.location">
+                <target>Standort</target>
+            </trans-unit>
+            <trans-unit id="model.location.tab.address">
+                <target>Adresse</target>
+            </trans-unit>
+            <trans-unit id="model.location.tab.contact">
+                <target>Kontakt</target>
+            </trans-unit>
+            <trans-unit id="model.location.tab.categories">
+                <target>Kategorien</target>
+            </trans-unit>
+            <trans-unit id="model.location.property.name">
+                <target>Name</target>
+            </trans-unit>
+            <trans-unit id="model.location.property.address">
+                <target>Adresse</target>
+            </trans-unit>
+            <trans-unit id="model.location.property.zip">
+                <target>PLZ</target>
+            </trans-unit>
+            <trans-unit id="model.location.property.city">
+                <target>Stadt</target>
+            </trans-unit>
+            <trans-unit id="model.location.property.country">
+                <target>Land</target>
+            </trans-unit>
+            <trans-unit id="model.location.property.phone">
+                <target>Telefon</target>
+            </trans-unit>
+            <trans-unit id="model.location.property.fax">
+                <target>Fax</target>
+            </trans-unit>
+            <trans-unit id="model.location.property.url">
+                <target>URL</target>
+            </trans-unit>
+            <trans-unit id="model.location.property.email">
+                <target>E-Mail</target>
+            </trans-unit>
+            <trans-unit id="model.location.property.latitude">
+                <target>Breitengrad</target>
+            </trans-unit>
+            <trans-unit id="model.location.property.longitude">
+                <target>Längengrad</target>
+            </trans-unit>
+            <trans-unit id="model.location.property.categories">
+                <target>Kategorien</target>
+            </trans-unit>
+            <trans-unit id="model.location.property.filterCategories">
+                <target>Filterkategorien</target>
+            </trans-unit>
+
+            <!--
+              Phone model
+            -->
+            <trans-unit id="model.phone">
+                <target>Telefon</target>
+            </trans-unit>
+            <trans-unit id="model.phone.property.name">
+                <target>Name</target>
+            </trans-unit>
+            <trans-unit id="model.phone.property.phone">
+                <target>Nummer</target>
+            </trans-unit>
+
+            <!--
+              Mail model
+            -->
+            <trans-unit id="model.email">
+                <target>E-Mail</target>
+            </trans-unit>
+            <trans-unit id="model.email.property.name">
+                <target>Name</target>
+            </trans-unit>
+            <trans-unit id="model.email.property.email">
+                <target>E-Mail Adresse</target>
+            </trans-unit>
+
+            <!--
+              sys category model
+            -->
+            <trans-unit id="model.sys_category.location_manager_image">
+                <target>Standortmarker</target>
+            </trans-unit>
+            <trans-unit id="model.sys_category.tab.location_manager">
+                <target>Standort Manager</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

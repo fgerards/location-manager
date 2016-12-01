@@ -1,0 +1,67 @@
+<li data-latitude="{location.latitude}"
+    data-longitude="{location.longitude}"
+    data-tags="{location.categoryUids}"
+    data-marker="{location.markerImage}"
+    data-fixed="{fixed}"
+    class="location-manager__location"
+>
+
+    <div class="location-manager__location__name">
+        <h3>{location.name}</h3>
+        <small>{location.address}, {location.zip} {location.city}</small>
+    </div>
+
+    <div class="location-manager__location__content">
+
+        <f:if condition="{location.url}">
+            <p>{location.url}</p>
+        </f:if>
+
+        <f:if condition="{location.email}">
+            E-Mail:
+            <ul>
+                <f:for each="{location.email}" as="email">
+                    <li>{email.email}</li>
+                </f:for>
+            </ul>
+        </f:if>
+
+        <f:if condition="{location.phone}">
+            Phone:
+            <ul>
+                <f:for each="{location.phone}" as="phone">
+                    <li>{phone.phone}</li>
+                </f:for>
+            </ul>
+        </f:if>
+
+        <f:if condition="{location.fax}">
+            Fax:
+            <ul>
+                <f:for each="{location.fax}" as="fax">
+                    <li>{fax.phone}</li>
+                </f:for>
+            </ul>
+        </f:if>
+
+        <f:if condition="{location.categories}">
+            Categories:
+            <ul>
+                <f:for each="{location.categories}" as="category">
+                    <li>{category.title}</li>
+                </f:for>
+            </ul>
+        </f:if>
+
+
+        <div class="location-manager__button location-manager__location__show">
+            SHOW
+        </div>
+
+        <div class="location-manager__location__info-window">
+            <!-- Infowindow that will be shown on the map -->
+            <h3>{location.name}</h3>
+            <p>{location.address}, {location.zip} {location.city}</p>
+        </div>
+    </div>
+</li>

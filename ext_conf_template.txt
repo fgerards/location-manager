@@ -1,0 +1,11 @@
+# cat=basic; type=string; label=API Key
+googleMaps.apiKey =
+
+# cat=basic; type=boolean; label=Return arrays instead of extbase objects for query results.:This is a custom feature and is useful if you're working with a big amount of objects, as it skips extbase objects. By design this will disable the custom category marker setting
+extbase.returnRawQueryResults =
+
+# cat=basic; type=boolean; label=Enable custom marker images in categories.:This will enable you to add file references to categories which are then used as marker images on the map
+categoryMarker =
+
+# cat=basic; type=boolean; label=Enable the use of separate categories for the filter:This will enable you to use categories in your filter that are independent from the displayed categories. The update script can be used to provisions the filter categories using the current categories.
+enableFilterCategories =

@@ -1,0 +1,23 @@
+page.includeJSFooterlibs {
+	locationmanager = EXT:location_manager/Resources/Public/Javascripts/Distribution/LocationManager.js
+}
+
+page.includeCSS.location_manager = EXT:location_manager/Resources/Public/Stylesheets/main.css
+
+plugin.tx_locationmanager {
+	settings {
+		markers {
+			icons {
+				# default = 
+			}
+		}
+	}
+	view {
+		templateRootPaths {
+			0 = EXT:location_manager/Resources/Private/Templates/
+		}
+		partialsRootPaths {
+			0 = EXT:location_manager/Resources/Private/Partials/
+		}
+	}
+}

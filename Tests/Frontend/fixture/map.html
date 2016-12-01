@@ -1,0 +1,104 @@
+<style>
+    #map {
+        width: 500px;
+        height: 300px;
+        background: grey;
+    }
+
+    /* the padding element should make any page scrollable */
+    #padding {
+        height: 9999px;
+        background: #f0f0f0;
+    }
+
+    #wrapper {
+        overflow: hidden;
+    }
+</style>
+
+<div id="wrapper">
+    <div id="map"></div>
+    <div id="clickToEnable-enabled">enabled</div>
+    <div id="clickToEnable-disabled">disabled</div>
+
+    <ul id="tags">
+        <li class="tag" data-tags="1">TAG 1</li>
+        <li class="tag" data-tags="2">TAG 2</li>
+        <li class="tag" data-tags="3">TAG 3</li>
+        <li class="tag" data-tags="4">TAG 4</li>
+    </ul>
+    <div id="tagReset">reset tags</div>
+
+    <input type="text" id="search" value="Freiburg, Germany">
+
+    <ul id="fixed">
+        <li class="location"
+            data-latitude="20"
+            data-longitude="20"
+            data-fixed="1"
+            data-tags="1"
+        >
+            <h4>20:20</h4>
+            <div class="showOnMap">show on map</div>
+            <div class="js-infoWindow">INFOWINDOW 20:20</div>
+        </li>
+
+        <li class="location"
+            data-latitude="40"
+            data-longitude="40"
+            data-fixed="1"
+            data-tags="1,2"
+        >
+            <h4>40:40</h4>
+            <div class="showOnMap">show on map</div>
+            <div class="js-infoWindow">INFOWINDOW 40:40</div>
+        </li>
+    </ul>
+
+    <ul id="list">
+        <li class="location"
+            data-latitude="30"
+            data-longitude="20"
+            data-fixed=""
+            data-tags="1,3,4"
+        >
+            <h4>30:20</h4>
+            <div class="showOnMap">show on map</div>
+            <div class="js-infoWindow">INFOWINDOW 30:20</div>
+        </li>
+        <li class="location"
+            data-latitude="40"
+            data-longitude="20"
+            data-fixed=""
+            data-tags="1,2,3"
+        >
+            <h4>40:20</h4>
+            <div class="showOnMap">show on map</div>
+            <div class="js-infoWindow">INFOWINDOW 40:20</div>
+        </li>
+        <li class="location"
+            data-latitude="50"
+            data-longitude="40"
+            data-fixed=""
+            data-tags="1,3"
+        >
+            <h4>50:40</h4>
+            <div class="showOnMap">show on map</div>
+            <div class="js-infoWindow">INFOWINDOW 50:40</div>
+        </li>
+        <li class="location"
+            data-latitude="40"
+            data-longitude="30"
+            data-fixed=""
+            data-tags="1,4"
+        >
+            <h4>40:30</h4>
+            <div class="showOnMap">show on map</div>
+            <div class="js-infoWindow">INFOWINDOW 40:30</div>
+        </li>
+    </ul>
+
+    <div id="padding">
+
+    </div>
+</div>

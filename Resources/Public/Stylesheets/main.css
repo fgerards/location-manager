@@ -1,0 +1,120 @@
+
+
+/* === MAP === */
+.location-manager__map-wrapper {
+    position: relative;
+    width: 100%;
+    height: 300px;
+}
+
+.location-manager__map {
+    width: 100%;
+    height: 100%;
+}
+
+/* fix for google maps */
+.location-manager__map img {
+    max-height: none !important;
+    max-width: none !important;
+}
+
+
+/* === MOVE TOGGLE === */
+.location-manager__toggle {
+    position: absolute;
+    bottom: 14px;
+    right: 0;
+    background: rgba(255, 255, 255, .5);
+    padding: 3px 15px;
+}
+
+.location-manager__toggle:after {
+    content: '';
+    position: absolute;
+    left: -50px;
+    top: 0;
+    bottom: 0;
+    width: 50px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .5));
+}
+
+
+/* === TAGS === */
+.location-manager__tags {
+    background: #555;
+    padding: 10px;
+    list-style: none;
+}
+
+.location-manager__tag {
+    display: inline-block;
+    background: #fff;
+    color: #555;
+    margin: 0 5px;
+    padding: 3px 10px;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.location-manager__tag:hover {
+    background: #eee;
+}
+
+.location-manager__tag_active {
+    font-weight: bold;
+    background: #ccc;
+}
+
+
+/* === LOCATION LIST === */
+
+.location-manager__locations {
+    list-style: none;
+    clear: both;
+}
+
+.location-manager__location {
+    float: left;
+    width: calc(33% - 20px);
+    border: 1px solid #aaa;
+    min-height: 420px;
+    margin: 10px;
+}
+
+.location-manager__location__name {
+    background: #555;
+    color: #fff;
+    padding: 15px 20px;
+}
+
+.location-manager__location__content {
+    position: relative;
+    margin: 10px;
+}
+
+.location-manager__location__info-window {
+    display: none;
+}
+
+/* === MISC === */
+
+.location-manager__button {
+    display: inline-block;
+    background: #555;
+    border: 2px solid #555;
+    border-radius: 3px;
+    color: #fff;
+    padding: 7px 10px;
+    transition: .5s all;
+    cursor: pointer;
+}
+
+.location-manager__button:hover {
+    background: #fff;
+    color: #555;
+}
+
+/* first item of google maps autocomplete is displayed as "half selected" */
+.pac-container .pac-item:first-child {
+    background-color: #f5f5f5;
+}

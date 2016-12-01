@@ -1,0 +1,66 @@
+{namespace n=NIMIUS\LocationManager\ViewHelper}
+
+<f:if condition="{settings.debug}">
+    <f:debug>{_all}</f:debug>
+</f:if>
+
+<div class="location-manager">
+
+    <div class="location-manager__map-wrapper">
+        <div id="{ids.map}" class="location-manager__map"></div>
+
+        <f:if condition="{setting.map.enableLocking} = '1'">
+            <div class="location-manager__toggle">
+                <div id="{ids.lockEnabled}" class="location-manager__toggle_enabled">
+                    Hover to disable <!-- TODO language label -->
+                </div>
+                <div id="{ids.lockDisabled}" class="location-manager__toggle_disabled">
+                    click on map to enable <!-- TODO language label -->
+                </div>
+            </div>
+        </f:if>
+    </div>
+
+
+    <f:if condition="{settings.filter.enable}">
+        <div id="{ids.tagContainer}">
+            <ul class="location-manager__tags" id="{ids.tags}">
+                <li class="location-manager__tag location-manager__tag_reset" id="{ids.resetTag}">x</li>
+                <f:for each="{categories}" as="category">
+                    <li class="location-manager__tag location-manager__tag_regular" data-tags="{category.uid}">
+                        <f:if condition="{category.markerImage}">
+                            <img src="{category.markerImage}"/>
+                        </f:if>
+                        {category.title}
+                    </li>
+                </f:for>
+            </ul>
+        </div>
+    </f:if>
+
+
+    <f:if condition="{fixed}">
+        <ul class="location-manager__locations location-manager__locations_fixed" id="{ids.fixed}">
+            <f:for each="{fixed}" as="location">
+                <f:render partial="Location" arguments="{ location: location, fixed: 1 }"/>
+            </f:for>
+        </ul>
+    </f:if>
+
+    <f:if condition="{settings.search.enable}">
+        <form id="{ids.searchForm}">
+            Search: <!-- TODO language label -->
+            <input type="text" id="{ids.searchField}" class="location-manager__search"/>
+            <input type="submit" value="search" class="location-manager__button"/>
+        </form>
+    </f:if>
+
+
+    <ul id="{ids.markers}" class="location-manager__locations">
+        <f:for each="{locations}" as="location">
+            <f:render partial="Location" arguments="{ location: location }"/>
+        </f:for>
+    </ul>
+
+    <f:render partial="JavascriptInit" arguments="{_all}"/>
+</div>

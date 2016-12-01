@@ -1,0 +1,62 @@
+{
+	"name": "nimius/location_manager",
+	"type": "typo3-cms-extension",
+	"description": "Provides features for handling, visualizing, and filtering locations.",
+	"keywords": [
+		"TYPO3", "extension", "locations", "stores", "addresses", "manager", "management", "maps"
+	],
+	"homepage": "https://github.com/nimius/location_manager",
+	"authors": [
+		{
+			"name": "NIMIUS",
+			"role": "Developer",
+			"homepage": "http://nimius.net"
+		}
+	],
+	"repositories": [
+		{
+			"type": "composer",
+			"url": "https://composer.typo3.org"
+		}
+	],
+	"license": "GPL-2.0+",
+	"require": {
+		"typo3/cms-core": ">=6.2.0,<8",
+		"typo3-ter/static-info-tables": ">=6.3.0"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "~4.8.0"
+	},
+	"replace": {
+		"location_manager": "self.version",
+		"typo3-ter/location_manager": "self.version"
+	},
+	"config": {
+		"vendor-dir": ".Build/vendor",
+		"bin-dir": ".Build/bin"
+	},
+	"extra": {
+		"typo3/cms": {
+			"cms-package-dir": "{$vendor-dir}/typo3/cms",
+			"web-dir": ".Build/Web"
+		}
+	},
+	"autoload": {
+		"psr-4": {
+			"NIMIUS\\LocationManager\\": "Classes"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"NIMIUS\\LocationManager\\Tests\\Backend\\": "Tests/Backend",
+			"TYPO3\\CMS\\Core\\Tests\\": ".Build/vendor/typo3/cms/typo3/sysext/core/Tests/",
+			"TYPO3\\CMS\\Fluid\\Tests\\": ".Build/vendor/typo3/cms/typo3/sysext/fluid/Tests/"
+		}
+	},
+	"scripts": {
+		"post-autoload-dump": [
+			"mkdir -p .Build/Web/typo3conf/ext/",
+			"[ -L .Build/Web/typo3conf/ext/location_manager ] || ln -snvf ../../../../. .Build/Web/typo3conf/ext/location_manager"
+		]
+	}
+}

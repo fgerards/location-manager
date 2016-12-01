@@ -1,0 +1,21 @@
+{namespace n=NIMIUS\LocationManager\ViewHelper}
+
+<script type="text/javascript">
+    window.addEventListener('load', function () {
+        try {
+            var config = JSON.parse('<n:format.json>{configuration}</n:format.json>');
+            var locationManager = new LocationManager(config);
+        } catch (e) {
+            document.querySelector('#{ids.map}').innerHTML = '<div style="background: yellow; color: black; padding: 25px;">' +
+                    '<div style="font-size: 24px; font-weight: bold;">Error while initializing LocationManager. Are static template included and jQuery loaded? </div><br>' +
+                    '<code><b>' + e.name + '</b><br/>' + e.message + '</code>' +
+                    '</div>';
+
+            debugger;
+
+            // rethrow error
+            throw e;
+        }
+    });
+
+</script>
