@@ -41,6 +41,6 @@ script:
   - >
     echo;
     echo "Running unit tests";
-    .Build/bin/phpunit -c Tests/Backend/Build/UnitTests.xml
+    .Build/bin/phpunit -c .Build/vendor/typo3/cms/typo3/sysext/core/Build/UnitTests.xml Tests/Backend/Unit/
 
   - ./node_modules/.bin/karma start --single-run
