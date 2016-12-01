@@ -29,6 +29,7 @@ before_install:
   - phpenv config-rm xdebug.ini
   - composer self-update
   - composer --version
+  - nvm install v6.7.0
   - nvm use v6.7.0
   - node --version
   - npm --version
