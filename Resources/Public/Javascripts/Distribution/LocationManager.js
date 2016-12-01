@@ -1624,12 +1624,19 @@ var LocationManager = function () {
 
             // initialize markers
             this._settings.markerElements.forEach(function (markerElement) {
+                var lat = parseFloat(markerElement.getAttribute(_this3._settings.latAttribute));
+                var lng = parseFloat(markerElement.getAttribute(_this3._settings.longAttribute));
+
+                if (isNaN(lat) || isNaN(lng)) {
+                    console.warn('LocationManager', 'marker has at least one undefined coordinate', { lat: lat, lng: lng }, markerElement, _this3);
+                }
+
                 var markerSettings = {
                     map: _this3.map,
                     icon: _this3._settings.markerIcon,
                     position: {
-                        lat: parseFloat(markerElement.getAttribute(_this3._settings.latAttribute)),
-                        lng: parseFloat(markerElement.getAttribute(_this3._settings.longAttribute))
+                        lat: lat || 0,
+                        lng: lng || 0
                     }
                 };
                 _this3._log('_initializeMarker', markerSettings);

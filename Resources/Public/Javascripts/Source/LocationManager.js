@@ -307,12 +307,19 @@ class LocationManager {
 
         // initialize markers
         this._settings.markerElements.forEach(markerElement => {
+            let lat = parseFloat(markerElement.getAttribute(this._settings.latAttribute));
+            let lng = parseFloat(markerElement.getAttribute(this._settings.longAttribute));
+
+            if (isNaN(lat) || isNaN(lng)) {
+                console.warn('LocationManager', 'marker has at least one undefined coordinate', {lat: lat, lng: lng}, markerElement, this);
+            }
+
             let markerSettings = {
                 map: this.map,
                 icon: this._settings.markerIcon,
                 position: {
-                    lat: parseFloat(markerElement.getAttribute(this._settings.latAttribute)),
-                    lng: parseFloat(markerElement.getAttribute(this._settings.longAttribute))
+                    lat: lat || 0,
+                    lng: lng || 0
                 }
             };
             this._log('_initializeMarker', markerSettings);
