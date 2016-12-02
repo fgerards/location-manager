@@ -1969,7 +1969,12 @@ var AutocompletedSearchController = function () {
                 bounds = this.mapsHelper.expandLatLngBounds(bounds, this.settings.expand);
             }
             this.locationManager.map.fitBounds(bounds);
-            this.locationManager._settings.mapContainer.scrollIntoView(true);
+
+            /** @type {HideMapOnMobileController} */
+            var hideMapOnMobile = this.locationManager.getController(HideMapOnMobileController);
+            if (!hideMapOnMobile || hideMapOnMobile.isMapShown()) {
+                this.locationManager._settings.mapContainer.scrollIntoView(true);
+            }
         }
     }, {
         key: 'onMarkerClick',
@@ -2217,6 +2222,11 @@ var HideMapOnMobileController = function () {
                 this.showMap();
             }
         }
+
+        /**
+         * Displays the map
+         */
+
     }, {
         key: 'showMap',
         value: function showMap() {
@@ -2225,6 +2235,11 @@ var HideMapOnMobileController = function () {
                 left: ''
             });
         }
+
+        /**
+         * Hides the map
+         */
+
     }, {
         key: 'hideMap',
         value: function hideMap() {
