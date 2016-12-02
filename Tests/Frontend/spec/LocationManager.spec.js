@@ -44,7 +44,7 @@ describe('LocationManager', function() {
         var factoryArgs = { test: 'lalala' };
         new LocationManager({
             markerContainer: '#list',
-            markerElements: 'li',
+            markerElements: 'li.location',
             mapContainer: '#map',
             controllerFactory: {
                 testFactory: factoryArgs
