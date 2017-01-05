@@ -2222,11 +2222,6 @@ var HideMapOnMobileController = function () {
                 this.showMap();
             }
         }
-
-        /**
-         * Displays the map
-         */
-
     }, {
         key: 'showMap',
         value: function showMap() {
@@ -2235,17 +2230,12 @@ var HideMapOnMobileController = function () {
                 left: ''
             });
         }
-
-        /**
-         * Hides the map
-         */
-
     }, {
         key: 'hideMap',
         value: function hideMap() {
             this.$mapContainer.css({
                 position: 'absolute',
-                left: '9999px'
+                left: '-9999px'
             });
         }
 
@@ -2257,7 +2247,7 @@ var HideMapOnMobileController = function () {
     }, {
         key: 'isMapShown',
         value: function isMapShown() {
-            return this.$mapContainer.offset().left < 9000;
+            return this.$mapContainer.offset().left > -9000;
         }
     }, {
         key: 'onMapMove',

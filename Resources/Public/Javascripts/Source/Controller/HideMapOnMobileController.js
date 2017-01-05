@@ -91,7 +91,7 @@ class HideMapOnMobileController {
     hideMap() {
         this.$mapContainer.css({
             position: 'absolute',
-            left: '9999px'
+            left: '-9999px'
         });
     }
 
@@ -100,7 +100,7 @@ class HideMapOnMobileController {
      * @return {boolean}
      */
     isMapShown() {
-        return this.$mapContainer.offset().left < 9000;
+        return this.$mapContainer.offset().left > -9000;
     }
 
     onMapMove() {}

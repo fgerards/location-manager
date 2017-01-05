@@ -24,14 +24,14 @@ describe('HideMapOnMobileController', function() {
         map = document.querySelector('#map');
     });
 
-    it ('should hide the map by moving it to the right', function() {
+    it ('should hide the map by moving it to the left', function() {
         var offset = map.getBoundingClientRect().left;
-        assert.isAtMost(offset, 1000);
+        assert.isAtLeast(offset, -1000);
 
         controller.hideMap();
 
         offset = map.getBoundingClientRect().left;
-        assert.isAtLeast(offset, 1500);
+        assert.isAtMost(offset, -1500);
     });
 
     it ('should show the map by removing the offset', function() {
