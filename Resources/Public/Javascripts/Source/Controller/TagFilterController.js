@@ -167,12 +167,17 @@ class TagFilterController {
             this._removeTag(tag);
             return;
         }
-            this.addActiveClass(tag);
+        this.addActiveClass(tag);
         this.locationManager.marker.forEach(marker => {
             this._changeMarkerState(marker, (marker._tags.indexOf(tag.id) !== -1))
         });
 
-        this.activeTags.push(tag);
+        if (this.settings.combine === 'none') {
+            this.activeTags = [ tag ];
+        } else {
+            this.activeTags.push(tag);
+        }
+
         this.locationManager.updateMap();
         this.locationManager.updateList();
     }
