@@ -54,7 +54,7 @@ class RefreshListOnMoveController {
     hideInList() {
         const bounds = this._locationManager.map.getBounds();
         this._locationManager.marker.forEach(marker => {
-            marker.showInList = bounds.contains(marker.marker.getPosition());
+            marker.showInList = marker.showOnMap && bounds.contains(marker.marker.getPosition());
         });
         this._locationManager.updateList();
     }

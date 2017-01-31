@@ -1,4 +1,6 @@
 describe('TagFilterController', function() {
+    this.timeout(6000);
+
     /**
      * @type {LocationManager}
      */
