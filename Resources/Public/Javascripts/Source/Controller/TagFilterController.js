@@ -178,6 +178,10 @@ class TagFilterController {
             this.activeTags.push(tag);
         }
 
+        // reapply map filtering by RefreshListOnMoveController
+        const refreshListOnMove = this.locationManager.getController(RefreshListOnMoveController);
+        if (refreshListOnMove) { refreshListOnMove.hideInList(); }
+
         this.locationManager.updateMap();
         this.locationManager.updateList();
     }

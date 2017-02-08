@@ -2818,6 +2818,12 @@ var TagFilterController = function () {
                 this.activeTags.push(tag);
             }
 
+            // reapply map filtering by RefreshListOnMoveController
+            var refreshListOnMove = this.locationManager.getController(RefreshListOnMoveController);
+            if (refreshListOnMove) {
+                refreshListOnMove.hideInList();
+            }
+
             this.locationManager.updateMap();
             this.locationManager.updateList();
         }
