@@ -96,26 +96,39 @@ class TceMainDataMapperHook
             $table . '.uid = ' . (int)$uid . ' AND address IS NOT NULL AND city IS NOT NULL AND country IS NOT NULL'
         );
 
-        if ($record) {
-            $geoService = ObjectUtility::get('B13\Geocoding\Service\GeoService');
-            $street = $record['address'];
-            if (!empty($record['name'])) {
-                $street = $record['name'] . ', ' . $street;
-            }
+        if (!$record) {
+            return;
+        }
+
+        $geoService = ObjectUtility::get('B13\Geocoding\Service\GeoService');
+        $street = $record['address'];
+        if (!empty($record['name'])) {
+            $street = $record['name'] . ', ' . $street;
+        }
+
+        $coordinates = $geoService->getCoordinatesForAddress(
+            $street,
+            $record['zip'],
+            $record['city'],
+            $record['country']
+        );
+
+        // If no results have been found, then try again without the Locations name.
+        if (array_key_exists('status', $coordinates) && $coordinates['status'] === 'ZERO_RESULTS') {
             $coordinates = $geoService->getCoordinatesForAddress(
-                $street,
+                $record['address'],
                 $record['zip'],
                 $record['city'],
                 $record['country']
             );
+        }
 
-            if ($coordinates['latitude'] && $coordinates['longitude']) {
-                $GLOBALS['TYPO3_DB']->exec_UPDATEquery(
-                    $table,
-                    'uid = ' . (int)$uid,
-                    $coordinates
-                );
-            }
+        if ($coordinates['latitude'] && $coordinates['longitude']) {
+            $GLOBALS['TYPO3_DB']->exec_UPDATEquery(
+                $table,
+                'uid = ' . (int)$uid,
+                $coordinates
+            );
         }
     }
 }
