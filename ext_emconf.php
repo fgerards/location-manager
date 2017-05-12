@@ -23,10 +23,10 @@ $EM_CONF[$_EXTKEY] = [
     'constraints' => [
         'depends' => [
             'static_info_tables' => '6.3.0-7.6.99',
-            'typo3' => '6.2.0-7.6.99',
+            'typo3' => '6.2.0-8.7.99',
         ],
         'suggests' => [
-            'geocoding' => '1.2.0-1.2.99',
+            'geocoding' => '2.0.0-2.0.99',
         ]
     ],
 ];

@@ -3,7 +3,7 @@
 <script type="text/javascript">
     window.addEventListener('load', function () {
         try {
-            var config = JSON.parse('<n:format.json>{configuration}</n:format.json>');
+            var config = JSON.parse('<f:format.raw><n:format.json>{configuration}</n:format.json></f:format.raw>');
             var locationManager = new LocationManager(config);
         } catch (e) {
             document.querySelector('#{ids.map}').innerHTML = '<div style="background: yellow; color: black; padding: 25px;">' +
