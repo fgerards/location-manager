@@ -10,3 +10,5 @@ Thumbs.db
 # Ignore generated files from tests
 Tests/Frontend/coverage/
 Tests/Frontend/build/
+Documentation/_make/build/
+Documentation/warnings.txt
