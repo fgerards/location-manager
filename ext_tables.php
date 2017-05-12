@@ -29,6 +29,10 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['proc
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::makeCategorizable($_EXTKEY, 'tx_locationmanager_domain_model_location', 'categories', [
     'label' => 'LLL:EXT:location_manager/Resources/Private/Language/locallang.xlf:model.location.property.categories',
 ]);
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::makeCategorizable($_EXTKEY, 'tx_locationmanager_domain_model_location', 'filter_categories', [
-    'label' => 'LLL:EXT:location_manager/Resources/Private/Language/locallang.xlf:model.location.property.filterCategories',
-]);
+
+if ((bool)\NIMIUS\LocationManager\Utility\ConfigurationUtility::getExtensionConfiguration()['enableFilterCategories']) {
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::makeCategorizable($_EXTKEY,
+        'tx_locationmanager_domain_model_location', 'filter_categories', [
+            'label' => 'LLL:EXT:location_manager/Resources/Private/Language/locallang.xlf:model.location.property.filterCategories',
+        ]);
+}
