@@ -8,7 +8,7 @@ CREATE TABLE tx_locationmanager_domain_model_location (
 	name varchar(250) default NULL,
 	address varchar(250) default NULL,
 	zip varchar(30) default NULL,
-	city varchar(30) default NULL,
+	city varchar(100) default NULL,
 	country int(11) unsigned default '0' NOT NULL,
 	email int(11) unsigned default '0' NOT NULL,
 	url varchar(250) default NULL,
@@ -16,8 +16,8 @@ CREATE TABLE tx_locationmanager_domain_model_location (
 	phone int(11) default 0 NOT NULL,
 	fax varchar(11) default 0 NOT NULL,
 	
-	latitude DECIMAL(10,8) signed NULL,
-	longitude DECIMAL(11,8) signed NULL,
+	latitude DECIMAL(10,8) DEFAULT NULL,
+	longitude DECIMAL(11,8) DEFAULT NULL,
 	
 	categories int(11) unsigned default 0,
 	filter_categories int(11) unsigned default 0,

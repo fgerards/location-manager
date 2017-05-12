@@ -5,12 +5,18 @@ matrix:
   include:
     - php: 5.5
       env: TYPO3_VERSION=^7.6.0
-    
+
     - php: 5.6
       env: TYPO3_VERSION=^7.6.0
-    
+
     - php: 7.0
       env: TYPO3_VERSION=^7.6.0
+
+    - php: 7.0
+      env: TYPO3_VERSION=^8.7.0
+
+    - php: 7.1
+      env: TYPO3_VERSION=^8.7.0
 
 addons:
   apt:
@@ -21,13 +27,23 @@ cache:
   directories:
     - "$HOME/.composer/cache"
 
+notifications:
+  slack:
+    secure: ZYD5smcyD+gt4XE5AXJY4SHAfSO0zFWGQmu/5pAmZGEvmecGJTJlaIGNW8DXHgObsPufvMBHHHGPm5rgB4nACdMctnQt+bAcxY5ZTmec7Sa9UPuwWQZAsXY8JsucAiOmAckZS08qRvZIX8BCiaQPHW2ftwmCDPLXSz/ByabqBZ3iUeNd7SV3Yfq7/kHs9OIRNzVAEe5Kw4nYYUD/u8rpRbNlqmue9fk/SALTMge5AYUrSJTQ0Dg/ZFeyP1MbSoBwCgDAGWnrcVofQaO4dTGaD2lLhGAQ7mEUwctGU8fuqdJkuDf9QhWZt/dNc3MrNIniTDkAo5ErtMkmQji4SD3dXwLNb5rTTdmFWiVPc70b8xpiNFD5mHZv0aCTjmzWeJ3j8vS9hWGP89he5V5Otgb60vXpK0sEtv8AlXiaZzMQxSE2zn5Q/QXe04oVtVATy9pIUTJ8fPwUu31NVZggiM0w8EXxsRyTynq7KuN5Stx7PTeaxB7n6EbXpgDsEgE3yfGswEEliMGLE1LN7pvl9ZZHPtrd/bb+3VDl6s5FPS48xMR9EoX3T9IXOmmJpNkqV6ZtBZjyB6P8WdX9tOZxJHRTwqlpuuBce3kDL/e32vquO/Nn8u7gpCGWRaMMUBK0aGUBnXPUgwJhiJhZYYw8jDztLNKuADGDQn8DFGzQtGcwJHM=
+
 before_install:
   - phpenv config-rm xdebug.ini
   - composer self-update
   - composer --version
+  - nvm install v6.7.0
+  - nvm use v6.7.0
+  - node --version
+  - npm --version
+  - npm install
+  - ./node_modules/.bin/grunt babel:test
 
 before_script:
-  - composer require --prefer-source typo3/cms="$TYPO3_VERSION@dev"
+  - composer require typo3/cms="$TYPO3_VERSION"
   - git checkout composer.json
   - export TYPO3_PATH_WEB=$PWD/.Build/Web
 
@@ -35,12 +51,6 @@ script:
   - >
     echo;
     echo "Running unit tests";
-    .Build/bin/phpunit -c .Build/vendor/typo3/cms/typo3/sysext/core/Build/UnitTests.xml Tests/Unit/
+    ./.Build/bin/phpunit -c .Build/vendor/nimut/testing-framework/res/Configuration/UnitTests.xml Tests/Backend/Unit/
 
-  - >
-    echo;
-    export typo3DatabaseName="typo3";
-    export typo3DatabaseHost="localhost";
-    export typo3DatabaseUsername="root";
-    export typo3DatabasePassword="";
-    find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo "Running functional test suite {}"; .Build/bin/phpunit --colors  -c .Build/vendor/typo3/cms/typo3/sysext/core/Build/FunctionalTests.xml {}'
+  - ./node_modules/.bin/karma start --single-run

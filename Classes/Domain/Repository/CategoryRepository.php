@@ -35,7 +35,7 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
         $fieldName = ((bool)ConfigurationUtility::getExtensionConfiguration()['enableFilterCategories']) ? 'filter_categories' : 'categories';
         $query->statement('
             SELECT DISTINCT
-                *
+                sys_category.*
             FROM
                 sys_category
             JOIN
@@ -119,7 +119,7 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
         $query = $this->createQuery();
         $query->statement('
             SELECT
-                *
+                sys_category.*
             FROM
                 sys_category
             JOIN

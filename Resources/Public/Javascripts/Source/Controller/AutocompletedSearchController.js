@@ -111,7 +111,12 @@ class AutocompletedSearchController {
             bounds = this.mapsHelper.expandLatLngBounds(bounds, this.settings.expand);
         }
         this.locationManager.map.fitBounds(bounds);
-        this.locationManager._settings.mapContainer.scrollIntoView(true);
+
+        /** @type {HideMapOnMobileController} */
+        let hideMapOnMobile = this.locationManager.getController(HideMapOnMobileController);
+        if (!hideMapOnMobile || hideMapOnMobile.isMapShown()) {
+            this.locationManager._settings.mapContainer.scrollIntoView(true);
+        }
     }
 
     onMarkerClick() {}

@@ -49,7 +49,7 @@ class InfoWindowController {
 
         // initialize infowindow
         this.infoWindow = new google.maps.InfoWindow({ content: '' });
-        this.infoWindow.addListener('closeclick', this.addCurrentMarkerToClusterer.bind(this));
+        this.infoWindow.addListener('closeclick', this.onInfoWindowClose.bind(this));
     }
 
     /**
@@ -77,6 +77,13 @@ class InfoWindowController {
             marker.showInList = true;
             this.locationManager.updateList();
         }
+    }
+
+    /**
+     * Callback that is executed, when the InfoWindow is closed.
+     */
+    onInfoWindowClose() {
+        this.addCurrentMarkerToClusterer();
     }
 
     addCurrentMarkerToClusterer() {

@@ -97,7 +97,7 @@ $tx_locationmanager_domain_model_location = [
             'label' => $lll . 'property.city',
             'config' => [
                 'type' => 'input',
-                'max' => 30,
+                'max' => 100,
                 'eval' => 'trim',
             ],
         ],

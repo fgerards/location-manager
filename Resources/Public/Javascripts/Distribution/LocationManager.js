@@ -1624,12 +1624,19 @@ var LocationManager = function () {
 
             // initialize markers
             this._settings.markerElements.forEach(function (markerElement) {
+                var lat = parseFloat(markerElement.getAttribute(_this3._settings.latAttribute));
+                var lng = parseFloat(markerElement.getAttribute(_this3._settings.longAttribute));
+
+                if (isNaN(lat) || isNaN(lng)) {
+                    console.warn('LocationManager', 'marker has at least one undefined coordinate', { lat: lat, lng: lng }, markerElement, _this3);
+                }
+
                 var markerSettings = {
                     map: _this3.map,
                     icon: _this3._settings.markerIcon,
                     position: {
-                        lat: parseFloat(markerElement.getAttribute(_this3._settings.latAttribute)),
-                        lng: parseFloat(markerElement.getAttribute(_this3._settings.longAttribute))
+                        lat: lat || 0,
+                        lng: lng || 0
                     }
                 };
                 _this3._log('_initializeMarker', markerSettings);
@@ -1962,7 +1969,12 @@ var AutocompletedSearchController = function () {
                 bounds = this.mapsHelper.expandLatLngBounds(bounds, this.settings.expand);
             }
             this.locationManager.map.fitBounds(bounds);
-            this.locationManager._settings.mapContainer.scrollIntoView(true);
+
+            /** @type {HideMapOnMobileController} */
+            var hideMapOnMobile = this.locationManager.getController(HideMapOnMobileController);
+            if (!hideMapOnMobile || hideMapOnMobile.isMapShown()) {
+                this.locationManager._settings.mapContainer.scrollIntoView(true);
+            }
         }
     }, {
         key: 'onMarkerClick',
@@ -2223,7 +2235,7 @@ var HideMapOnMobileController = function () {
         value: function hideMap() {
             this.$mapContainer.css({
                 position: 'absolute',
-                left: '9999px'
+                left: '-9999px'
             });
         }
 
@@ -2235,7 +2247,7 @@ var HideMapOnMobileController = function () {
     }, {
         key: 'isMapShown',
         value: function isMapShown() {
-            return this.$mapContainer.offset().left < 9000;
+            return this.$mapContainer.offset().left > -9000;
         }
     }, {
         key: 'onMapMove',
@@ -2305,7 +2317,7 @@ var InfoWindowController = function () {
 
             // initialize infowindow
             this.infoWindow = new google.maps.InfoWindow({ content: '' });
-            this.infoWindow.addListener('closeclick', this.addCurrentMarkerToClusterer.bind(this));
+            this.infoWindow.addListener('closeclick', this.onInfoWindowClose.bind(this));
         }
 
         /**
@@ -2336,6 +2348,16 @@ var InfoWindowController = function () {
                 marker.showInList = true;
                 this.locationManager.updateList();
             }
+        }
+
+        /**
+         * Callback that is executed, when the InfoWindow is closed.
+         */
+
+    }, {
+        key: 'onInfoWindowClose',
+        value: function onInfoWindowClose() {
+            this.addCurrentMarkerToClusterer();
         }
     }, {
         key: 'addCurrentMarkerToClusterer',
@@ -2422,7 +2444,7 @@ var RefreshListOnMoveController = function () {
         value: function hideInList() {
             var bounds = this._locationManager.map.getBounds();
             this._locationManager.marker.forEach(function (marker) {
-                marker.showInList = bounds.contains(marker.marker.getPosition());
+                marker.showInList = marker.showOnMap && bounds.contains(marker.marker.getPosition());
             });
             this._locationManager.updateList();
         }
@@ -2790,7 +2812,18 @@ var TagFilterController = function () {
                 _this13._changeMarkerState(marker, marker._tags.indexOf(tag.id) !== -1);
             });
 
-            this.activeTags.push(tag);
+            if (this.settings.combine === 'none') {
+                this.activeTags = [tag];
+            } else {
+                this.activeTags.push(tag);
+            }
+
+            // reapply map filtering by RefreshListOnMoveController
+            var refreshListOnMove = this.locationManager.getController(RefreshListOnMoveController);
+            if (refreshListOnMove) {
+                refreshListOnMove.hideInList();
+            }
+
             this.locationManager.updateMap();
             this.locationManager.updateList();
         }
