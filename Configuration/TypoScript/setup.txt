@@ -16,7 +16,7 @@ plugin.tx_locationmanager {
 		templateRootPaths {
 			0 = EXT:location_manager/Resources/Private/Templates/
 		}
-		partialsRootPaths {
+		partialRootPaths {
 			0 = EXT:location_manager/Resources/Private/Partials/
 		}
 	}
