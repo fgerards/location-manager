@@ -24,15 +24,3 @@
 
 // Register datamap processing.
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass']['EXT:NIMIUS.' . $_EXTKEY] = 'NIMIUS\\LocationManager\\Hook\\TceMainDataMapperHook';
-
-// Add category relations.
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::makeCategorizable($_EXTKEY, 'tx_locationmanager_domain_model_location', 'categories', [
-    'label' => 'LLL:EXT:location_manager/Resources/Private/Language/locallang.xlf:model.location.property.categories',
-]);
-
-if ((bool)\NIMIUS\LocationManager\Utility\ConfigurationUtility::getExtensionConfiguration()['enableFilterCategories']) {
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::makeCategorizable($_EXTKEY,
-        'tx_locationmanager_domain_model_location', 'filter_categories', [
-            'label' => 'LLL:EXT:location_manager/Resources/Private/Language/locallang.xlf:model.location.property.filterCategories',
-        ]);
-}

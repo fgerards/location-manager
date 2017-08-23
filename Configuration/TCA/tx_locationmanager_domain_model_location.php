@@ -180,4 +180,25 @@ if ((bool)\NIMIUS\LocationManager\Utility\ConfigurationUtility::getExtensionConf
     $tx_locationmanager_domain_model_location['types']['0']['showitem'] .= ', filter_categories';
 }
 
+// Add category relations.
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::makeCategorizable(
+    'location_manager',
+    'tx_locationmanager_domain_model_location',
+    'categories',
+    [
+        'label' => 'LLL:EXT:location_manager/Resources/Private/Language/locallang.xlf:model.location.property.categories',
+    ]
+);
+
+if ((bool)\NIMIUS\LocationManager\Utility\ConfigurationUtility::getExtensionConfiguration()['enableFilterCategories']) {
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::makeCategorizable(
+        'location_manager',
+        'tx_locationmanager_domain_model_location',
+        'filter_categories',
+        [
+            'label' => 'LLL:EXT:location_manager/Resources/Private/Language/locallang.xlf:model.location.property.filterCategories',
+        ]
+    );
+}
+
 return $tx_locationmanager_domain_model_location;
