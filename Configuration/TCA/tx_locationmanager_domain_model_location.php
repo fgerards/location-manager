@@ -116,7 +116,7 @@ $tx_locationmanager_domain_model_location = [
             'label' => $lll . 'property.latitude',
             'config' => [
                 'type' => 'input',
-                'readOnly' => true,
+                'readOnly' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('geocoding'),
                 'eval' => \NIMIUS\LocationManager\Evaluation\LatitudeEvaluation::class
             ],
         ],
@@ -124,7 +124,7 @@ $tx_locationmanager_domain_model_location = [
             'label' => $lll . 'property.longitude',
             'config' => [
                 'type' => 'input',
-                'readOnly' => true,
+                'readOnly' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('geocoding'),
                 'eval' => \NIMIUS\LocationManager\Evaluation\LongitudeEvaluation::class
             ],
         ],
