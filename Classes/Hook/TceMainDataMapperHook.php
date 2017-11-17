@@ -14,7 +14,8 @@ namespace NIMIUS\LocationManager\Hook;
  * The TYPO3 project - inspiring people to share!
  */
 
-use NIMIUS\LocationManager\Utility\ObjectUtility;
+use B13\Geocoding\Service\GeoService;
+use NIMIUS\LocationManager\Utility\ConfigurationUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 /**
@@ -100,7 +101,10 @@ class TceMainDataMapperHook
             return;
         }
 
-        $geoService = ObjectUtility::get('B13\Geocoding\Service\GeoService');
+        // Explicitly setting the API Key to `null`, if there is none configured.
+        // This lets GeoService catch that and use it's configured API Key.
+        $apiKey = ConfigurationUtility::getExtensionConfiguration()['googleMaps.']['apiKey'] ?: null;
+        $geoService = new GeoService($apiKey);
         $street = $record['address'];
         if (!empty($record['name'])) {
             $street = $record['name'] . ', ' . $street;
