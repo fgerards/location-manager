@@ -14,7 +14,11 @@
     <div class="location-manager__location__content">
 
         <f:if condition="{location.url}">
-            <p>{location.url}</p>
+            <p>
+                <f:link.typolink parameter="{location.url}">
+                    <f:uri.typolink parameter="{location.url}" />
+                </f:link.typolink>
+            </p>
         </f:if>
 
         <f:if condition="{location.email}">

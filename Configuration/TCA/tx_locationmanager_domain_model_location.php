@@ -164,6 +164,18 @@ $tx_locationmanager_domain_model_location = [
                 'type' => 'input',
                 'max' => 250,
                 'eval' => 'trim',
+                'wizards' => [
+                    'link' => [
+                        'type' => 'popup',
+                        'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:header_link_formlabel',
+                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_link.gif',
+                        'module' => [
+                            'name' => 'wizard_link'
+                        ],
+                        'JSopenParams' => 'height=800,width=600,status=0,menubar=0,scrollbars=1'
+                    ]
+                ],
+                'softref' => 'typolink'
             ],
         ],
     ],
