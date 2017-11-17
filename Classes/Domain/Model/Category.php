@@ -15,7 +15,7 @@ namespace NIMIUS\LocationManager\Domain\Model;
  */
 
 use NIMIUS\LocationManager\Utility\ConfigurationUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use NIMIUS\LocationManager\Utility\ObjectUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Service\ImageService;
@@ -74,7 +74,7 @@ class Category extends \TYPO3\CMS\Extbase\Domain\Model\Category
         }
         if ($image) {
             /** @var ImageService $imageService */
-            $imageService = GeneralUtility::makeInstance(ImageService::class);
+            $imageService = ObjectUtility::get(ImageService::class);
 
             $processedFile = $imageService->applyProcessingInstructions($image->getOriginalResource(), [
                 'width' => '64c',
