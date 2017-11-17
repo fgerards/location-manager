@@ -47,7 +47,7 @@ class TceMainDataMapperHook
         }
 
         if (!is_numeric($uid)) {
-            $uid = $reference->substNEWwithIDs[$uid];
+            $uid = $dataHandler->substNEWwithIDs[$uid];
         }
 
         $this->geocodeCoordinates($table, $uid);
