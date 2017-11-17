@@ -74,9 +74,7 @@ class LocationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         // If returnRawQueryResults is set, substitution of child records has do be done manually.
         if ($proxy->getReturnRawQueryResults()) {
             foreach ($locations as $index => $location) {
-                if ((int)$locations[$index]['categories']) {
-                    $locations[$index]['categories'] = $this->categoryRepository->findRawByLocation($location);
-                }
+                $locations[$index]['categories'] = $this->categoryRepository->findRawByLocation($location);
 
                 if ((bool)ConfigurationUtility::getExtensionConfiguration()['enableFilterCategories']) {
                     if ((int)$locations[$index]['filter_categories']) {
