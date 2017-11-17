@@ -98,6 +98,19 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $filterCategories;
 
     /**
+     * Location constructor:
+     * Initializes empty ObjectStorages
+     */
+    public function __construct()
+    {
+        $this->filterCategories = new ObjectStorage();
+        $this->categories = new ObjectStorage();
+        $this->fax = new ObjectStorage();
+        $this->phone = new ObjectStorage();
+        $this->email = new ObjectStorage();
+    }
+
+    /**
      * @param int $sysLanguageUid
      * @return void
      */
