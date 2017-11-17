@@ -45,18 +45,25 @@ class LocationsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
      */
     public function indexAction()
     {
-        // TODO cleanup
         $extensionConfiguration = ConfigurationUtility::getExtensionConfiguration();
+
+        // Load Google maps
+        // TODO cleanup
+        $scriptUrl = 'https://maps.googleapis.com/maps/api/js?libraries=geometry,places&key=' .
+            $extensionConfiguration['googleMaps.']['apiKey'];
         $GLOBALS['TSFE']->additionalHeaderData['locationManager'] = '
-			<script src="https://maps.googleapis.com/maps/api/js?libraries=geometry,places&key=' . $extensionConfiguration['googleMaps.']['apiKey'] . '"></script>
-		';
+            <script src="' . $scriptUrl . '"></script>
+        ';
+
         $contentObject = ObjectUtility::getConfigurationManager()->getContentObject()->data;
         $config = $this->buildConfiguration();
 
         // retrieve fixed records
         $fixed = [];
         $fixedUids = [];
-        if (array_key_exists('content', $this->settings) && array_key_exists('fixed', $this->settings['content'])) {
+        if (array_key_exists('content', $this->settings) &&
+            array_key_exists('fixed', $this->settings['content'])
+        ) {
             $fixedUids = GeneralUtility::intExplode(',', $this->settings['content']['fixed']);
             $fixed = $this->locationRepository->findByUids($fixedUids);
         }
@@ -71,7 +78,7 @@ class LocationsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
             'contentObject' => $contentObject,
             'ids' => $config['ids'],
             'configuration' => $config['configuration'],
-            'fixed' => $fixed
+            'fixed' => $fixed,
         ]);
 
         if ($this->settings['filter']['enable']) {
@@ -122,8 +129,8 @@ class LocationsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
                 'streetViewControl' => false,
                 'center' => [
                     'lat' => 0,  // these will be falsy and thus the map will be automatically aligned
-                    'lng' => 0
-                ]
+                    'lng' => 0,
+                ],
             ],
             'markerElements' => '#' . $ids['markers'] . ' > li, #' . $ids['fixed'] . ' > li',
             'markerContainer' => '#' . $ids['markers'],
@@ -133,8 +140,8 @@ class LocationsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
                 'showOnClick' => [],
                 'sortByDistance' => [],
                 'dynamicMarkerImage' => [],
-                'infoWindow' => []
-            ]
+                'infoWindow' => [],
+            ],
         ];
 
         if (!empty($this->settings['map']['style'])) {
@@ -144,7 +151,7 @@ class LocationsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
         if ((bool)$this->settings['search']['enable']) {
             $locationManagerConfiguration['controllerFactory']['autocompletedSearch'] = [
                 'field' => '#' . $ids['searchField'],
-                'expand' => (int) $this->settings['search']['expand']
+                'expand' => (int)$this->settings['search']['expand'],
             ];
         }
 
@@ -160,14 +167,14 @@ class LocationsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
                 'items' => '#' . $ids['tags'] . ' > *:not(#' . $ids['resetTag'] . ')',
                 'reset' => '#' . $ids['resetTag'],
                 'container' => '#' . $ids['tagContainer'],
-                'combine' => $this->settings['filter']['combine']
+                'combine' => $this->settings['filter']['combine'],
             ];
         }
 
         if ($this->settings['map']['enableLocking']) {
             $locationManagerConfiguration['controllerFactory']['clickToEnable'] = [
                 'enabled' => '#' . $ids['lockEnabled'],
-                'disabled' => '#' . $ids['lockDisabled']
+                'disabled' => '#' . $ids['lockDisabled'],
             ];
         }
 
@@ -177,7 +184,7 @@ class LocationsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
 
         return [
             'configuration' => $locationManagerConfiguration,
-            'ids' => $ids
+            'ids' => $ids,
         ];
     }
 }

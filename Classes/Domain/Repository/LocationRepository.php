@@ -78,8 +78,10 @@ class LocationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
                 if ((bool)ConfigurationUtility::getExtensionConfiguration()['enableFilterCategories']) {
                     if ((int)$locations[$index]['filter_categories']) {
-                        $locations[$index]['filterCategories'] = $this->categoryRepository->findRawByLocation($location,
-                            'filter_categories');
+                        $locations[$index]['filterCategories'] = $this->categoryRepository->findRawByLocation(
+                            $location,
+                            'filter_categories'
+                        );
                         $locations[$index]['categoryUids'] = implode(',', array_map(
                             function ($c) {
                                 return $c['uid'];

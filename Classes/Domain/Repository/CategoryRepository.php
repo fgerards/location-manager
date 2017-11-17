@@ -32,7 +32,11 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
     public function findAllWithLocations()
     {
         $query = $this->createQuery();
-        $fieldName = ((bool)ConfigurationUtility::getExtensionConfiguration()['enableFilterCategories']) ? 'filter_categories' : 'categories';
+        $fieldName = 'categories';
+        if (ConfigurationUtility::getExtensionConfiguration()['enableFilterCategories']) {
+            $fieldName = 'filter_categories';
+        }
+
         $query->statement('
             SELECT DISTINCT
                 sys_category.*
@@ -128,8 +132,7 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
             WHERE
                 sys_category_record_mm.tablenames = "tx_locationmanager_domain_model_location"
                 AND sys_category_record_mm.fieldname = "' . $fieldname . '"
-                AND sys_category_record_mm.uid_foreign = ' . (int)$uid
-        );
+                AND sys_category_record_mm.uid_foreign = ' . (int)$uid);
         return $query->execute(true);
     }
 }

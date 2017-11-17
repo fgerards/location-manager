@@ -48,7 +48,8 @@ class ConfigurationUtility
      */
     public static function getFrameworkTyposcriptConfiguration()
     {
-        return ObjectUtility::getConfigurationManager()->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+        return ObjectUtility::getConfigurationManager()
+            ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
     }
 
     /**
@@ -76,7 +77,8 @@ class ConfigurationUtility
         }
         $signature = 'tx_' . $extKey . '.';
 
-        $configuration = ObjectUtility::getConfigurationManager()->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
+        $configuration = ObjectUtility::getConfigurationManager()
+            ->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
         $settings = (array)$configuration['plugin.'][$signature]['settings.'];
 
         // A cObj is only given in some cases, mostly in FE context.

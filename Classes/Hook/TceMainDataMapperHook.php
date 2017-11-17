@@ -34,9 +34,12 @@ class TceMainDataMapperHook
      * @param array &$fieldArray
      * @param \TYPO3\CMS\Core\DataHandling\DataHandler &$dataHandler
      * @return void
+     *
+     * @codingStandardsIgnoreStart
      */
     public function processDatamap_afterDatabaseOperations($status, $table, $uid, &$fieldArray, &$dataHandler)
     {
+        // @codingStandardsIgnoreEnd
         if (!ExtensionManagementUtility::isLoaded('geocoding')) {
             return;
         }
@@ -70,7 +73,7 @@ class TceMainDataMapperHook
     }
 
     /**
-     * Returns true, if the given fieldArray of a tx_workshops_domain_model_location record contains manual geo coordinate
+     * Returns true, if the given fieldArray of a tx_workshops_domain_model_location record contains manual coordinate
      * updates. Geocoding will not be used, if the user manually specified coordinates.
      *
      * @param array $fieldArr
@@ -94,7 +97,10 @@ class TceMainDataMapperHook
         $record = $GLOBALS['TYPO3_DB']->exec_SELECTgetSingleRow(
             'name, address, zip, city, static_countries.cn_short_en AS country',
             $table . ' JOIN static_countries ON (' . $table . '.country = static_countries.uid)',
-            $table . '.uid = ' . (int)$uid . ' AND address IS NOT NULL AND city IS NOT NULL AND country IS NOT NULL'
+            $table . '.uid = ' . (int)$uid .
+            ' AND address IS NOT NULL' .
+            ' AND city IS NOT NULL' .
+            ' AND country IS NOT NULL'
         );
 
         if (!$record) {

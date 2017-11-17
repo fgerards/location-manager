@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ruleset name="LIS">
+
+
+	<file>Classes/</file>
+
+    <!-- Base ruleset: PSR2 -->
+    <rule ref="PSR2" />
+
+    <!-- Enforce the usage of short array style -->
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax.Found" />
+
+</ruleset>
