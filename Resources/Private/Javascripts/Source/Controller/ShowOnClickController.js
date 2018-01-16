@@ -3,7 +3,7 @@
  * @property {string} [linkSelector = '.tx-locationmanager-show'] - The amount of throttling to apply
  */
 
-import { InfoWindowController } from "./InfoWindowController";
+import { InfoWindowController } from './InfoWindowController';
 
 /**
  * Zooms to a marker whenever the showlink is being clicked.

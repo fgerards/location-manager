@@ -41,6 +41,19 @@ module.exports = {
     module: {
         loaders: [
             {
+                enforce:  'pre',
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'eslint-loader',
+                options: {
+                    cache: true,
+                    emitWarning: true,
+                    rules: {
+                        indent: [ 'error', 4, { 'SwitchCase': 1 } ]
+                    }
+                }
+            },
+            {
                 test: /js-marker-clusterer/,
                 loader: 'exports-loader?MarkerClusterer'
             },

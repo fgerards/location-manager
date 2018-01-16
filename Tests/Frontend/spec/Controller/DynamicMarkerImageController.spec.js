@@ -1,7 +1,7 @@
 
-import "../../../../Resources/Private/Javascripts/Source/LocationManager";
-import { DynamicMarkerImageController } from "../../../../Resources/Private/Javascripts/Source/Controller/DynamicMarkerImageController";
-import { LocationManagerControllerFactory } from "../../../../Resources/Private/Javascripts/Source/LocationManagerControllerFactory";
+import '../../../../Resources/Private/Javascripts/Source/LocationManager';
+import { DynamicMarkerImageController } from '../../../../Resources/Private/Javascripts/Source/Controller/DynamicMarkerImageController';
+import { LocationManagerControllerFactory } from '../../../../Resources/Private/Javascripts/Source/LocationManagerControllerFactory';
 import { assert } from 'chai';
 
 

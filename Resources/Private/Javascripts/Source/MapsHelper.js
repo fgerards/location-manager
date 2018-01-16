@@ -46,8 +46,8 @@ export class MapsHelper {
         var ne = bounds.getNorthEast();
         var sw = bounds.getSouthWest();
 
-        ne = this.latLngKilometerOffset(ne, {lat: distance, lng: distance});
-        sw = this.latLngKilometerOffset(sw, {lat: -distance, lng: -distance});
+        ne = this.latLngKilometerOffset(ne, { lat: distance, lng: distance });
+        sw = this.latLngKilometerOffset(sw, { lat: -distance, lng: -distance });
 
         return new google.maps.LatLngBounds(sw, ne);
     }

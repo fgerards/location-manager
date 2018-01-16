@@ -1,11 +1,11 @@
-import { LocationManagerControllerFactory } from "../../../Resources/Private/Javascripts/Source/LocationManagerControllerFactory";
+import { LocationManagerControllerFactory } from '../../../Resources/Private/Javascripts/Source/LocationManagerControllerFactory';
 import { assert } from 'chai';
-import sinon from 'sinon'
+import sinon from 'sinon';
 
 describe('LocationmanagerControllerFactory', function() {
 
     it ('should add constructors', function() {
-        function Constructor() {};
+        function Constructor() {}
         var key = Math.random().toString(36).substr(2,10);
 
         LocationManagerControllerFactory.register(key, Constructor);
@@ -16,6 +16,7 @@ describe('LocationmanagerControllerFactory', function() {
         var settings = { a: 'test' };
         var key = Math.random().toString(36).substr(2,10);
 
+        // eslint-disable-next-line no-unused-vars
         this.MyConstructor = function(mySettings) {};
         sinon.spy(this, 'MyConstructor');
 
@@ -23,13 +24,13 @@ describe('LocationmanagerControllerFactory', function() {
         var instance = LocationManagerControllerFactory.make(key, settings);
 
         assert.isTrue(this.MyConstructor.calledWith(settings));
-        assert.isTrue(instance instanceof this.MyConstructor)
+        assert.isTrue(instance instanceof this.MyConstructor);
     });
 
     it ('should return null if Controller is not defined', function() {
         var key = Math.random().toString(36).substr(2,11);
         var instance = LocationManagerControllerFactory.make(key);
-        assert.isNull(instance)
-    })
+        assert.isNull(instance);
+    });
 
 });

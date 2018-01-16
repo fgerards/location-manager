@@ -1,7 +1,7 @@
 import html from '../../fixture/map.html';
 import { assert } from 'chai';
-import { ShowOnClickController } from "../../../../Resources/Private/Javascripts/Source/Controller/ShowOnClickController";
-import { LocationManager } from "../../../../Resources/Private/Javascripts/Source/LocationManager";
+import { ShowOnClickController } from '../../../../Resources/Private/Javascripts/Source/Controller/ShowOnClickController';
+import { LocationManager } from '../../../../Resources/Private/Javascripts/Source/LocationManager';
 import $ from 'jquery';
 import sinon from 'sinon';
 

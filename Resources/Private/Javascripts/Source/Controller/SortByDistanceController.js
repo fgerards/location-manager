@@ -3,7 +3,7 @@
  * @property {number} [throttle = 500]
  */
 
-import { throttle } from "../EventHelpers";
+import { throttle } from '../EventHelpers';
 
 /**
  * Zooms to a marker whenever the showlink is being clicked
@@ -51,7 +51,7 @@ export class SortByDistanceController {
     sortMarkers() {
         const center = this.locationManager.map.getCenter();
         this.locationManager.marker.sort((a,b) => {
-            return this.getDistance(center, a.marker.getPosition()) - this.getDistance(center, b.marker.getPosition())
+            return this.getDistance(center, a.marker.getPosition()) - this.getDistance(center, b.marker.getPosition());
         });
     }
 

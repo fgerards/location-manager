@@ -1,6 +1,6 @@
 import fixture from '../../fixture/map.html';
-import { LocationManager } from "../../../../Resources/Private/Javascripts/Source/LocationManager";
-import { TagFilterController } from "../../../../Resources/Private/Javascripts/Source/Controller/TagFilterController";
+import { LocationManager } from '../../../../Resources/Private/Javascripts/Source/LocationManager';
+import { TagFilterController } from '../../../../Resources/Private/Javascripts/Source/Controller/TagFilterController';
 import sinon from 'sinon';
 import { assert } from 'chai';
 import $ from 'jquery';
@@ -93,7 +93,7 @@ describe('TagFilterController', function() {
         locationManager.marker.forEach(function(marker) {
             assert.isTrue(marker.showInList);
             assert.isTrue(marker.showOnMap);
-        })
+        });
     });
 
     it ('should update the list & map after filtering', function() {
@@ -137,9 +137,9 @@ describe('TagFilterController', function() {
                 controller.updateTagsInList();
 
                 controller.tags.forEach(function(tag) {
-                    assert.equal(tags.indexOf(tag.id) > -1, $(tag.element).css('display') !== 'none')
+                    assert.equal(tags.indexOf(tag.id) > -1, $(tag.element).css('display') !== 'none');
                 });
-                done()
+                done();
             }, 1500);
         }, 1500);
     });
@@ -167,7 +167,7 @@ describe('TagFilterController', function() {
         locationManager.marker.forEach(function(marker) {
             assert.isTrue(marker.showInList);
             assert.isTrue(marker.showOnMap);
-        })
+        });
     });
 
     it ('should initially hide the container, if no marker with filters are available', function(done) {

@@ -23,8 +23,8 @@
  */
 
 
-import { throttle } from "../EventHelpers";
-import { RefreshListOnMoveController } from "./RefreshListOnMoveController";
+import { throttle } from '../EventHelpers';
+import { RefreshListOnMoveController } from './RefreshListOnMoveController';
 
 /**
  * Handles the tag filter.
@@ -124,7 +124,7 @@ export class TagFilterController {
     removeActiveClasses() {
         this.tags.forEach(tag => {
             tag.element.classList.remove(this.settings.activeClass);
-        })
+        });
     }
 
     /**
@@ -172,7 +172,7 @@ export class TagFilterController {
         }
         this.addActiveClass(tag);
         this.locationManager.marker.forEach(marker => {
-            this._changeMarkerState(marker, (marker._tags.indexOf(tag.id) !== -1))
+            this._changeMarkerState(marker, (marker._tags.indexOf(tag.id) !== -1));
         });
 
         if (this.settings.combine === 'none') {

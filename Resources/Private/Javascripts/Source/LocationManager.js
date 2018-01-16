@@ -19,19 +19,19 @@
  */
 
 
-import { throttle } from "./EventHelpers";
+import { throttle } from './EventHelpers';
 import MarkerClusterer from 'js-marker-clusterer';
-import { LocationManagerControllerFactory } from "./LocationManagerControllerFactory";
-import { applyObjectDefaults } from "./Library/ObjectUtility";
-import { DynamicMarkerImageController } from "./Controller/DynamicMarkerImageController";
-import { InfoWindowController } from "./Controller/InfoWindowController";
-import { RefreshListOnMoveController } from "./Controller/RefreshListOnMoveController";
-import { ShowOnClickController } from "./Controller/ShowOnClickController";
-import { SortByDistanceController } from "./Controller/SortByDistanceController";
-import { ClickToEnableController } from "./Controller/ClickToEnableController";
-import { HideMapOnMobileController } from "./Controller/HideMapOnMobileController";
-import { AutocompletedSearchController } from "./Controller/AutocompletedSearchController";
-import { TagFilterController } from "./Controller/TagFilterController";
+import { LocationManagerControllerFactory } from './LocationManagerControllerFactory';
+import { applyObjectDefaults } from './Library/ObjectUtility';
+import { DynamicMarkerImageController } from './Controller/DynamicMarkerImageController';
+import { InfoWindowController } from './Controller/InfoWindowController';
+import { RefreshListOnMoveController } from './Controller/RefreshListOnMoveController';
+import { ShowOnClickController } from './Controller/ShowOnClickController';
+import { SortByDistanceController } from './Controller/SortByDistanceController';
+import { ClickToEnableController } from './Controller/ClickToEnableController';
+import { HideMapOnMobileController } from './Controller/HideMapOnMobileController';
+import { AutocompletedSearchController } from './Controller/AutocompletedSearchController';
+import { TagFilterController } from './Controller/TagFilterController';
 
 /*
  * Default controller setup
@@ -79,7 +79,7 @@ export class LocationManager {
         this._initializeMap();
         this._initializeMarker();
         // wait for google maps initialization
-        let listenerHandle = google.maps.event.addListener(this.map, 'bounds_changed', _ => {
+        let listenerHandle = google.maps.event.addListener(this.map, 'bounds_changed', () => {
             this._initializeControllers();
             google.maps.event.removeListener(listenerHandle);
         });
@@ -151,7 +151,8 @@ export class LocationManager {
         this._log('updateList');
 
         let child;
-        while (child = this._settings.markerContainer.firstChild) {
+        while (child) {
+            child = this._settings.markerContainer.firstChild;
             this._settings.markerContainer.removeChild(child);
         }
 
@@ -301,7 +302,9 @@ export class LocationManager {
             return;
         }
         let args = Array.prototype.slice.call(arguments);
-        args.unshift("LocationManager");
+        args.unshift('LocationManager');
+
+        // eslint-disable-next-line no-console
         console.log.apply(console, args);
     }
 
@@ -338,7 +341,7 @@ export class LocationManager {
             let lng = parseFloat(markerElement.getAttribute(this._settings.longAttribute));
 
             if (isNaN(lat) || isNaN(lng)) {
-                console.warn('LocationManager', 'marker has at least one undefined coordinate', {lat: lat, lng: lng}, markerElement, this);
+                console.warn('LocationManager', 'marker has at least one undefined coordinate', { lat: lat, lng: lng }, markerElement, this);
             }
 
             let markerSettings = {

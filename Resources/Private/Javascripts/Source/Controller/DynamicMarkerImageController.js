@@ -35,7 +35,7 @@ export class DynamicMarkerImageController {
             if (icon) {
                 marker.marker.setIcon(icon);
             }
-        })
+        });
     }
 
     onMapMove() {}

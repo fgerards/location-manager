@@ -1,7 +1,7 @@
-import html from '../../fixture/map.html'
-import { assert } from 'chai'
-import { RefreshListOnMoveController } from "../../../../Resources/Private/Javascripts/Source/Controller/RefreshListOnMoveController";
-import { LocationManager } from "../../../../Resources/Private/Javascripts/Source/LocationManager";
+import html from '../../fixture/map.html';
+import { assert } from 'chai';
+import { RefreshListOnMoveController } from '../../../../Resources/Private/Javascripts/Source/Controller/RefreshListOnMoveController';
+import { LocationManager } from '../../../../Resources/Private/Javascripts/Source/LocationManager';
 import sinon from 'sinon';
 
 describe('RefreshListOnMoveController', function() {
@@ -79,7 +79,7 @@ describe('RefreshListOnMoveController', function() {
                 assert.isFalse(marker.showInList);
             });
             done();
-        }, 1500)
+        }, 1500);
     });
 
     it ('should call updateList', function(done) {

@@ -1,4 +1,4 @@
-import { MapsHelper } from "../../../Resources/Private/Javascripts/Source/MapsHelper";
+import { MapsHelper } from '../../../Resources/Private/Javascripts/Source/MapsHelper';
 import { assert } from 'chai';
 
 describe ('MapsHelper', function() {
@@ -24,7 +24,7 @@ describe ('MapsHelper', function() {
             assert.equal(mapsHelper.degToRad(90), .5 * Math.PI);
             assert.equal(mapsHelper.degToRad(180), Math.PI);
             assert.equal(mapsHelper.degToRad(360), 2 * Math.PI);
-        })
+        });
     });
 
     describe('latLngKilometerOffset', function() {
@@ -72,6 +72,6 @@ describe ('MapsHelper', function() {
             assert.isTrue(fuzzyNumberEquals(distanceNe, distanceShould, 100));
             assert.isTrue(fuzzyNumberEquals(distanceSw, distanceShould, 100));
         });
-    })
+    });
 
 });

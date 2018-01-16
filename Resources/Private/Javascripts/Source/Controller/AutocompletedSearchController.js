@@ -5,8 +5,8 @@
  * @property {number} [expand = 0] - The amount to expand the search bounds by
  */
 
-import { MapsHelper } from "../MapsHelper";
-import { HideMapOnMobileController } from "./HideMapOnMobileController";
+import { MapsHelper } from '../MapsHelper';
+import { HideMapOnMobileController } from './HideMapOnMobileController';
 
 /**
  * Handles the search using google maps Autocomplete
@@ -67,7 +67,8 @@ export class AutocompletedSearchController {
                 form = node;
                 break;
             }
-        } while (node = node.parentNode);
+            node = node.parentNode;
+        } while (node);
 
         if (form) {
             form.addEventListener('submit', e => {
@@ -102,7 +103,7 @@ export class AutocompletedSearchController {
             }
 
             this.goToBounds(results[0].geometry.bounds);
-        })
+        });
     }
 
     /**

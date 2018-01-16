@@ -5,7 +5,7 @@
  * @property {string} [mapContainer]
  */
 
-import { throttle } from "../EventHelpers";
+import { throttle } from '../EventHelpers';
 
 /**
  * Hides the map on mobile devices.
@@ -74,10 +74,10 @@ export class HideMapOnMobileController {
 
         if (windowWidth < this.settings.threshold) {
             // mobile
-                this.hideMap();
+            this.hideMap();
         } else {
             // desktop
-                this.showMap();
+            this.showMap();
         }
     }
 

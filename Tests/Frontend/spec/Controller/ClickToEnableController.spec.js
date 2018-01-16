@@ -1,7 +1,7 @@
 import html from '../../fixture/map.html';
-import { ClickToEnableController } from "../../../../Resources/Private/Javascripts/Source/Controller/ClickToEnableController";
-import { LocationManager } from "../../../../Resources/Private/Javascripts/Source/LocationManager";
-import { assert } from 'chai'
+import { ClickToEnableController } from '../../../../Resources/Private/Javascripts/Source/Controller/ClickToEnableController';
+import { LocationManager } from '../../../../Resources/Private/Javascripts/Source/LocationManager';
+import { assert } from 'chai';
 import sinon from 'sinon';
 import $ from 'jquery';
 
@@ -115,12 +115,12 @@ describe('ClickToEnable', function() {
 
     it ('should hide the enabled item when disabling', function() {
         controller.enableDragging(false, locationManager);
-        assert.equal($('#clickToEnable-enabled').css('display'), 'none')
+        assert.equal($('#clickToEnable-enabled').css('display'), 'none');
     });
 
     it ('should hide the disabled item when enabling', function() {
         controller.enableDragging(true, locationManager);
-        assert.equal($('#clickToEnable-disabled').css('display'), 'none')
+        assert.equal($('#clickToEnable-disabled').css('display'), 'none');
     });
 
     // TODO continue writing tests

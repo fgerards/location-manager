@@ -1,6 +1,6 @@
 import html from '../../fixture/map.html';
-import { LocationManager } from "../../../../Resources/Private/Javascripts/Source/LocationManager";
-import { InfoWindowController } from "../../../../Resources/Private/Javascripts/Source/Controller/InfoWindowController";
+import { LocationManager } from '../../../../Resources/Private/Javascripts/Source/LocationManager';
+import { InfoWindowController } from '../../../../Resources/Private/Javascripts/Source/Controller/InfoWindowController';
 import { assert } from 'chai';
 import sinon from 'sinon';
 
@@ -62,7 +62,7 @@ describe('InfoWindowController', function() {
             container.remove();
             container = null;
         }
-    })
+    });
 
     it ('should open an infowindow on the given marker', function() {
         sinon.spy(controller.infoWindow, 'open');
@@ -107,6 +107,6 @@ describe('InfoWindowController', function() {
         sinon.spy(locationManager._markerClusterer, 'addMarker');
         controller.addCurrentMarkerToClusterer();
         assert.isTrue(locationManager._markerClusterer.addMarker.calledWith(marker.marker));
-    })
+    });
 
 });

@@ -3,7 +3,7 @@
  * @property {number} [throttle = 250] - The amount of throttling to apply
  */
 
-import { throttle } from "../EventHelpers";
+import { throttle } from '../EventHelpers';
 
 /**
  * Hides locations in the list that are not inside of the current map bounds

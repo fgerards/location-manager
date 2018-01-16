@@ -1,5 +1,5 @@
 import html from '../../fixture/map.html';
-import { HideMapOnMobileController } from "../../../../Resources/Private/Javascripts/Source/Controller/HideMapOnMobileController";
+import { HideMapOnMobileController } from '../../../../Resources/Private/Javascripts/Source/Controller/HideMapOnMobileController';
 import { assert } from 'chai';
 import sinon from 'sinon';
 

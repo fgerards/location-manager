@@ -1,7 +1,7 @@
 import html from '../../fixture/map.html';
 import { assert } from 'chai';
-import { SortByDistanceController } from "../../../../Resources/Private/Javascripts/Source/Controller/SortByDistanceController";
-import { LocationManager } from "../../../../Resources/Private/Javascripts/Source/LocationManager";
+import { SortByDistanceController } from '../../../../Resources/Private/Javascripts/Source/Controller/SortByDistanceController';
+import { LocationManager } from '../../../../Resources/Private/Javascripts/Source/LocationManager';
 
 describe('SortByDistanceController', function() {
 
@@ -75,7 +75,7 @@ describe('SortByDistanceController', function() {
             var distance = controller.getDistance(marker.marker.getPosition(), center);
             assert.isAtMost(lastDistance, distance);
             lastDistance = distance;
-        })
+        });
     });
 
 });

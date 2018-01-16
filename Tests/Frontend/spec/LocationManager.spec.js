@@ -1,8 +1,8 @@
-import { LocationManager } from "../../../Resources/Private/Javascripts/Source/LocationManager";
+import { LocationManager } from '../../../Resources/Private/Javascripts/Source/LocationManager';
 import fixture from '../fixture/map.html';
-import { LocationManagerControllerFactory } from "../../../Resources/Private/Javascripts/Source/LocationManagerControllerFactory";
+import { LocationManagerControllerFactory } from '../../../Resources/Private/Javascripts/Source/LocationManagerControllerFactory';
 import { assert } from 'chai';
-import { LocationManagerControllerStub } from "../stub/LocationManagerControllerStub";
+import { LocationManagerControllerStub } from '../stub/LocationManagerControllerStub';
 import sinon from 'sinon';
 
 
@@ -137,7 +137,7 @@ describe('LocationManager', function() {
         var index = null;
         var j = 0;
         while (index === null) {
-            if (++j > 100) { throw new Error("Aborting because of too many iterations while searching for unfixed element"); }
+            if (++j > 100) { throw new Error('Aborting because of too many iterations while searching for unfixed element'); }
             var i = Math.floor(Math.random() * locationManager.marker.length);
             if (!locationManager.marker[i].fixed) {
                 index = i;
@@ -198,7 +198,7 @@ describe('LocationManager', function() {
         try {
             locationManager._prepareSettings({
                 /* markerContainer and markerElements not set */
-            })
+            });
         } catch (e) {
             done();
         }

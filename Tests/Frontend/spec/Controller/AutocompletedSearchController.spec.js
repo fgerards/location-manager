@@ -1,6 +1,6 @@
 import html from '../../fixture/map.html';
-import { LocationManager } from "../../../../Resources/Private/Javascripts/Source/LocationManager";
-import { AutocompletedSearchController } from "../../../../Resources/Private/Javascripts/Source/Controller/AutocompletedSearchController";
+import { LocationManager } from '../../../../Resources/Private/Javascripts/Source/LocationManager';
+import { AutocompletedSearchController } from '../../../../Resources/Private/Javascripts/Source/Controller/AutocompletedSearchController';
 import { assert } from 'chai';
 import sinon from 'sinon';
 import $ from 'jquery';

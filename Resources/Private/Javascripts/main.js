@@ -1,4 +1,4 @@
-import { LocationManager } from "./Source/LocationManager";
+import { LocationManager } from './Source/LocationManager';
 
 document.addEventListener('DOMContentLoaded', () => {
     for (let container of document.querySelectorAll('[data-location-manager]')) {
