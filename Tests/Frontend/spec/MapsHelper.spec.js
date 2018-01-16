@@ -1,3 +1,6 @@
+import { MapsHelper } from "../../../Resources/Private/Javascripts/Source/MapsHelper";
+import { assert } from 'chai';
+
 describe ('MapsHelper', function() {
 
     /**

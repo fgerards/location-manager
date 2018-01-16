@@ -3,13 +3,15 @@
  * @property {number} [throttle = 250] - The amount of throttling to apply
  */
 
+import { throttle } from "../EventHelpers";
+
 /**
  * Hides locations in the list that are not inside of the current map bounds
  *
  * @implements {LocationManagerControllerInterface}
  */
 
-class RefreshListOnMoveController {
+export class RefreshListOnMoveController {
 
     /**
      * @param {RefreshListOnMoveController~settings} settings
@@ -18,7 +20,7 @@ class RefreshListOnMoveController {
         settings = settings || {};
         settings.throttle = settings.throttle || 250;
 
-        this._hideInListDebounced = EventHelpers.throttle(this.hideInList, settings.throttle, this);
+        this._hideInListDebounced = throttle(() => this.hideInList, settings.throttle);
     }
 
     /**
@@ -61,5 +63,3 @@ class RefreshListOnMoveController {
 
 
 }
-
-LocationManagerControllerFactory.register('refreshListOnMove', RefreshListOnMoveController);

@@ -1,19 +1,11 @@
 'use strict';
 
+var webpack = require('webpack');
+var CompressionPlugin = require('compression-webpack-plugin');
+
 module.exports = function (grunt) {
 
     grunt.initConfig({
-
-        jsdoc: {
-            dist: {
-                src: ['Resources/Public/Javascripts/LocationManager.js'],
-                options: {
-                    destination: './doc',
-                    configure: './jsdoc.json',
-                    readme: 'README.md'
-                }
-            }
-        },
 
         karma: {
             unit: {
@@ -22,64 +14,57 @@ module.exports = function (grunt) {
             }
         },
 
-        concat: {
-            options: {
-                stripBanners: true,
-                separator: '\n;;\n'
-            },
-            dist: {
-                files: {
-                    'Resources/Public/Javascripts/Distribution/LocationManager.js': [
-                        'Resources/Public/Javascripts/Source/Vendor/*.js',
-                        'Resources/Public/Javascripts/Source/*.js',
-                        'Resources/Public/Javascripts/Source/Controller/*.js',
-                    ]
-                }
-            }
-        },
+        //
+        // Webpack grunt configuration.
+        // This configuration builds upon the webpack configuration defined in webpack.config.js.
+        // Apart from the dependencies for the webpack configuration
+        // This adds the following dependencies:
+        //
+        // - grunt-webpack                      // Webpack integration for grunt
+        // - compression-webpack-plugin         // Gzip support for webpack
+        //
+        webpack: {
 
-        babel: {
-            options: {
-                sourceMap: false,
-                presets: ['es2015'],
-                plugins: ['transform-class-properties']
-            },
-            dist: {
-                files: {
-                    'Resources/Public/Javascripts/Distribution/LocationManager.js': 'Resources/Public/Javascripts/Distribution/LocationManager.js'
-                }
-            },
-            test: {
-                files: [{
-                    expand: true,
-                    cwd: 'Resources/Public/Javascripts/Source/',
-                    src: [
-                        '*.js',
-                        'Controller/*.js'
-                    ],
-                    dest: 'Tests/Frontend/build',
-                    ext: '.js',
-                }],
-                options: {
-                    sourceMaps: 'both'
-                }
-            }
-        },
+            // Load default dev configuration from webpack.config.js
+            options: require('./webpack.config.js'),
 
-        watch: {
-            scripts: {
-                files: ['Resources/Public/Javascripts/Source/**/*.js'],
-                tasks: ['concat', 'babel']
+            // Define webpack:dev as development configuration.
+            // This task is used for development, is fast and does not do any optimizations.
+            // This does not change anything from the default webpack config
+            dev: {},
+
+            // The wepack:prod plugin adds some options to the default webpack config.
+            prod: {
+
+                // Disable sourcemaps
+                devtool: false,
+
+                plugins: [
+
+                    // Set global variable to indicate production mode to Javascript frameworks
+                    // such as angular and vue
+                    new webpack.DefinePlugin({
+                        'process.env': { NODE_ENV: JSON.stringify('production') }
+                    }),
+
+                    // Add minifier & tree-shaking
+                    new webpack.optimize.UglifyJsPlugin({ minimize: true }),
+
+                    // Also generate .gz files at development time
+                    new CompressionPlugin({
+                        asset: "[path].gz[query]",
+                        algorithm: "gzip",
+                        test: /\.(js|html)/,
+                        minRatio: .8
+                    })
+                ]
             }
         }
     });
 
-    grunt.loadNpmTasks('grunt-jsdoc');
+    grunt.loadNpmTasks('grunt-webpack');
     grunt.loadNpmTasks('grunt-karma');
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-babel');
 
-    grunt.registerTask('build', ['concat', 'babel:dist', 'jsdoc']);
-    grunt.registerTask('test', ['babel:test', 'karma'])
+    grunt.registerTask('build', ['webpack:prod']);
+    grunt.registerTask('test', ['karma'])
 };

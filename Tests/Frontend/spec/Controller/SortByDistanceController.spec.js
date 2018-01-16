@@ -1,3 +1,8 @@
+import html from '../../fixture/map.html';
+import { assert } from 'chai';
+import { SortByDistanceController } from "../../../../Resources/Private/Javascripts/Source/Controller/SortByDistanceController";
+import { LocationManager } from "../../../../Resources/Private/Javascripts/Source/LocationManager";
+
 describe('SortByDistanceController', function() {
 
     /**
@@ -10,12 +15,13 @@ describe('SortByDistanceController', function() {
      */
     var controller;
 
-    before(function() {
-        fixture.setBase('Tests/Frontend/fixture');
-    });
+    let container;
 
     beforeEach(function() {
-        fixture.load('map.html');
+        container = document.createElement('div');
+        container.innerHTML = html;
+        document.body.appendChild(container);
+
         locationManager = new LocationManager({
             mapContainer: '#map',
             markerContainer: '#list',
@@ -39,6 +45,14 @@ describe('SortByDistanceController', function() {
         locationManager.addController(controller);
     });
 
+
+    afterEach(() => {
+        if (container) {
+            container.innerHTML = '';
+            container.remove();
+            container = null;
+        }
+    });
 
     it ('should calculate distances', function() {
         var ottawa = new google.maps.LatLng(45.421530, -75.697193);

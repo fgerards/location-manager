@@ -1,3 +1,10 @@
+import html from '../../fixture/map.html';
+import { assert } from 'chai';
+import { ShowOnClickController } from "../../../../Resources/Private/Javascripts/Source/Controller/ShowOnClickController";
+import { LocationManager } from "../../../../Resources/Private/Javascripts/Source/LocationManager";
+import $ from 'jquery';
+import sinon from 'sinon';
+
 describe('ShowOnClick', function() {
     /**
      * @type {LocationManager}
@@ -9,12 +16,13 @@ describe('ShowOnClick', function() {
      */
     var controller;
 
-    before(function() {
-        fixture.setBase('Tests/Frontend/fixture');
-    });
+    let container;
 
     beforeEach(function() {
-        fixture.load('map.html');
+        container = document.createElement('div');
+        container.innerHTML = html;
+        document.body.appendChild(container);
+
         locationManager = new LocationManager({
             mapContainer: '#map',
             markerContainer: '#list',
@@ -37,6 +45,15 @@ describe('ShowOnClick', function() {
         });
         locationManager.addController(controller);
     });
+
+    afterEach(() => {
+        if (container) {
+            container.innerHTML = '';
+            container.remove();
+            container = null;
+        }
+    });
+
 
     it ('should pan to the marker when clicking on the link', function() {
         var index = Math.floor(Math.random() * locationManager.marker.length);

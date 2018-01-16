@@ -19,6 +19,33 @@
  */
 
 
+import { throttle } from "./EventHelpers";
+import MarkerClusterer from 'js-marker-clusterer';
+import { LocationManagerControllerFactory } from "./LocationManagerControllerFactory";
+import { applyObjectDefaults } from "./Library/ObjectUtility";
+import { DynamicMarkerImageController } from "./Controller/DynamicMarkerImageController";
+import { InfoWindowController } from "./Controller/InfoWindowController";
+import { RefreshListOnMoveController } from "./Controller/RefreshListOnMoveController";
+import { ShowOnClickController } from "./Controller/ShowOnClickController";
+import { SortByDistanceController } from "./Controller/SortByDistanceController";
+import { ClickToEnableController } from "./Controller/ClickToEnableController";
+import { HideMapOnMobileController } from "./Controller/HideMapOnMobileController";
+import { AutocompletedSearchController } from "./Controller/AutocompletedSearchController";
+import { TagFilterController } from "./Controller/TagFilterController";
+
+/*
+ * Default controller setup
+ */
+LocationManagerControllerFactory.register('autocompletedSearch', AutocompletedSearchController);
+LocationManagerControllerFactory.register('clickToEnable', ClickToEnableController);
+LocationManagerControllerFactory.register('dynamicMarkerImage', DynamicMarkerImageController);
+LocationManagerControllerFactory.register('hideMapOnMobile', HideMapOnMobileController);
+LocationManagerControllerFactory.register('infoWindow', InfoWindowController);
+LocationManagerControllerFactory.register('refreshListOnMove', RefreshListOnMoveController);
+LocationManagerControllerFactory.register('showOnClick', ShowOnClickController);
+LocationManagerControllerFactory.register('sortByDistance', SortByDistanceController);
+LocationManagerControllerFactory.register('tagFilter', TagFilterController);
+
 /**
  * @typedef {Object} LocationManager~marker
  * @property {HTMLElement} element - The DOM element of this marker in the DOM
@@ -29,7 +56,7 @@
  * @property {boolean} [fixed] - Whether or not the marker is fixed (should not be effected by sorting & hiding
  */
 
-class LocationManager {
+export class LocationManager {
 
     /**
      * @type {google.maps.Map}
@@ -216,7 +243,7 @@ class LocationManager {
         //    settings.zoomToMarkers = true;
         // }
 
-        settings = $.extend(true, {}, DEFAULTS, settings);
+        settings = applyObjectDefaults(settings, DEFAULTS);
 
         // All DOM Elements in the settings can be supplied as strings which will have to be initialized
         const domSettings = ['markerElements'];
@@ -290,7 +317,7 @@ class LocationManager {
             this._settings.mapContainer,
             this._settings.mapOptions
         );
-        map.addListener('bounds_changed', EventHelpers.throttle(this.onMapMove, 20, this));
+        map.addListener('bounds_changed', throttle(() => this.onMapMove(), 20));
 
         this.map = map;
         this._log('_initializeMap', map);
@@ -379,6 +406,5 @@ class LocationManager {
         return this.marker;
     }
 }
-
 
 

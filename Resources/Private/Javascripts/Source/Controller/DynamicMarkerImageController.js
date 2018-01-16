@@ -9,7 +9,7 @@
  * @implements LocationManagerControllerInterface
  */
 
-class DynamicMarkerImageController {
+export class DynamicMarkerImageController {
 
     /**
      * @type {DynamicMarkerImageController~settings}
@@ -45,5 +45,3 @@ class DynamicMarkerImageController {
     preprocess() {}
 
 }
-
-LocationManagerControllerFactory.register('dynamicMarkerImage', DynamicMarkerImageController);

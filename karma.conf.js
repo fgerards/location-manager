@@ -14,38 +14,12 @@ module.exports = function (config) {
         // chai: assertion library (assert.equal, assert.isTrue, ...)
         // fixture: for loading fixtures
         // sinon: spy on methods
-        frameworks: ['mocha', 'chai', 'fixture', 'sinon'],
-
-        plugins: [
-            'karma-mocha',
-            'karma-chai',
-            'karma-fixture',
-            'karma-html2js-preprocessor',
-            'karma-sinon',
-            'karma-coverage',
-            'karma-phantomjs-launcher',
-            'karma-sourcemap-loader'
-        ],
-
+        frameworks: ['mocha'],
 
         // list of files / patterns to load in the browser
         files: [
-            'Tests/Frontend/libraries/*.js',
             'https://maps.googleapis.com/maps/api/js?sensor=true&v=3&libraries=geometry,places',
-
-            'Resources/Public/Javascripts/Source/Vendor/*.js',
-            'Tests/Frontend/build/*.js',
-            'Tests/Frontend/build/Controller/*.js',
-
-            'Tests/Frontend/stub/**/*.js',
-            'Tests/Frontend/spec/**/*.js',
-            {pattern: 'Tests/Frontend/fixture/*.html'},
-            {
-                pattern: 'Tests/Frontend/files/*',
-                watched: false,
-                included: false,
-                served: true
-            }
+            'Tests/Frontend/spec/**/*.spec.js'
         ],
 
 
@@ -56,23 +30,21 @@ module.exports = function (config) {
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            '**/*.html': ['html2js'],
-            'Tests/Frontend/build/**/*.js': ['sourcemap', 'coverage']
+            'Tests/Frontend/spec/**/*.spec.js': ['webpack'],
         },
 
+        webpack: require('./webpack.config'),
+
+        webpackMiddleware: {
+            // webpack-dev-middleware configuration
+            // i. e.
+            stats: 'errors-only'
+        },
 
         // test results reporter to use
         // possible values: 'dots', 'progress'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ['progress', 'coverage'],
-
-        coverageReporter: {
-             reporters:[
-                 { type: 'html', subdir: 'html' },
-                 { type: 'text-summary' }
-            ],
-            dir: 'Tests/Frontend/coverage'
-        },
+        reporters: ['progress'],
 
         // web server port
         port: 9876,
@@ -93,7 +65,7 @@ module.exports = function (config) {
 
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-        browsers: ['PhantomJS'],
+        browsers: ['Firefox'],
 
         phantomjsLauncher: {
             exitOnResourceError: true

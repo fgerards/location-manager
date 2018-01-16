@@ -3,13 +3,15 @@
  * @property {number} [throttle = 500]
  */
 
+import { throttle } from "../EventHelpers";
+
 /**
  * Zooms to a marker whenever the showlink is being clicked
  *
  * @implements LocationManagerControllerInterface
  */
 
-class SortByDistanceController {
+export class SortByDistanceController {
 
     /**
      * @type {SortByDistanceController~settings}
@@ -28,7 +30,7 @@ class SortByDistanceController {
         settings = settings || {};
         settings.throttle = settings.throttle || 500;
 
-        this._sortMarkersThrottled = EventHelpers.throttle(this.sortMarkers, settings.throttle, this);
+        this._sortMarkersThrottled = throttle(() => this.sortMarkers, settings.throttle);
         this.settings = settings;
     }
 
@@ -67,5 +69,3 @@ class SortByDistanceController {
     _sortMarkersThrottled;
 
 }
-
-LocationManagerControllerFactory.register('sortByDistance', SortByDistanceController);

@@ -1,3 +1,9 @@
+import html from '../../fixture/map.html';
+import { HideMapOnMobileController } from "../../../../Resources/Private/Javascripts/Source/Controller/HideMapOnMobileController";
+import { assert } from 'chai';
+import sinon from 'sinon';
+
+
 describe('HideMapOnMobileController', function() {
 
     /**
@@ -10,18 +16,26 @@ describe('HideMapOnMobileController', function() {
      */
     var map;
 
-    before(function() {
-        fixture.setBase('Tests/Frontend/fixture');
-    });
+    let container;
 
     beforeEach(function() {
-        fixture.load('map.html');
+        container = document.createElement('div');
+        container.innerHTML = html;
+        document.body.appendChild(container);
 
         controller = new HideMapOnMobileController({
             threshold: 768,
             mapContainer: '#map'
         });
         map = document.querySelector('#map');
+    });
+
+    afterEach(() => {
+        if (container) {
+            container.innerHTML = '';
+            container.remove();
+            container = null;
+        }
     });
 
     it ('should hide the map by moving it to the left', function() {

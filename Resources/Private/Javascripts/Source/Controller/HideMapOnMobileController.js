@@ -5,6 +5,8 @@
  * @property {string} [mapContainer]
  */
 
+import { throttle } from "../EventHelpers";
+
 /**
  * Hides the map on mobile devices.
  * Note: In order to preserve functionality on mobile devices, the map is note actually hidden,
@@ -13,7 +15,7 @@
  * @implements LocationManagerControllerInterface
  */
 
-class HideMapOnMobileController {
+export class HideMapOnMobileController {
 
     /**
      * @type {HideMapOnMobileController~settings}
@@ -21,9 +23,9 @@ class HideMapOnMobileController {
     settings;
 
     /**
-     * @type {JQuery}
+     * @type {HTMLElement}
      */
-    $mapContainer;
+    mapContainer;
 
     /**
      * @type {Function}
@@ -38,14 +40,12 @@ class HideMapOnMobileController {
         settings.threshold = settings.threshold || 768;
         settings.throttle = settings.throttle || 300;
 
-        if (typeof settings.mapContainer === 'string') {
-            this.$mapContainer = $(settings.mapContainer)
-        }
+        this.mapContainer = document.querySelector(settings.mapContainer);
 
         this.settings = settings;
 
         if (settings.throttle) {
-            this._onWindowResizeThrottled = EventHelpers.throttle(this.onWindowResize, settings.throttle, this);
+            this._onWindowResizeThrottled = throttle(() => this.onWindowResize, settings.throttle);
         } else {
             this._onWindowResizeThrottled = this.onWindowResize;
         }
@@ -55,8 +55,8 @@ class HideMapOnMobileController {
      * @param {LocationManager} locationManager
      */
     init(locationManager) {
-        if (!this.$mapContainer) {
-            this.$mapContainer = $(locationManager._settings.mapContainer);
+        if (!this.mapContainer) {
+            this.mapContainer = locationManager._settings.mapContainer;
         }
 
         window.addEventListener('resize', this._onWindowResizeThrottled.bind(this, null));
@@ -82,17 +82,13 @@ class HideMapOnMobileController {
     }
 
     showMap() {
-        this.$mapContainer.css({
-            position: '',
-            left: ''
-        });
+        this.mapContainer.style.position = '';
+        this.mapContainer.style.left = '';
     }
 
     hideMap() {
-        this.$mapContainer.css({
-            position: 'absolute',
-            left: '-9999px'
-        });
+        this.mapContainer.style.position = 'absolute';
+        this.mapContainer.style.left = '-9999px';
     }
 
     /**
@@ -100,7 +96,7 @@ class HideMapOnMobileController {
      * @return {boolean}
      */
     isMapShown() {
-        return this.$mapContainer.offset().left > -9000;
+        return this.mapContainer.getBoundingClientRect().left > -9000;
     }
 
     onMapMove() {}
@@ -110,5 +106,3 @@ class HideMapOnMobileController {
     preprocess() {}
 
 }
-
-LocationManagerControllerFactory.register('hideMapOnMobile', HideMapOnMobileController);

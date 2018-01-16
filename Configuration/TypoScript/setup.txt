@@ -1,5 +1,5 @@
 page.includeJSFooterlibs {
-	locationmanager = EXT:location_manager/Resources/Public/Javascripts/Distribution/LocationManager.js
+	locationmanager = EXT:location_manager/Resources/Public/Javascripts/Distribution/main.bundle.js
 }
 
 page.includeCSS.location_manager = EXT:location_manager/Resources/Public/Stylesheets/main.css

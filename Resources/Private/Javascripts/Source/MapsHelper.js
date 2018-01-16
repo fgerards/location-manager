@@ -1,4 +1,4 @@
-class MapsHelper {
+export class MapsHelper {
 
     /**
      * Helper function that converts degrees into radians

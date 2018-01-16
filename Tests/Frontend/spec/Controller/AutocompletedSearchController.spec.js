@@ -1,3 +1,11 @@
+import html from '../../fixture/map.html';
+import { LocationManager } from "../../../../Resources/Private/Javascripts/Source/LocationManager";
+import { AutocompletedSearchController } from "../../../../Resources/Private/Javascripts/Source/Controller/AutocompletedSearchController";
+import { assert } from 'chai';
+import sinon from 'sinon';
+import $ from 'jquery';
+
+
 describe('AutocompletedSearchController', function() {
 
     /**
@@ -10,17 +18,17 @@ describe('AutocompletedSearchController', function() {
      */
     var controller;
 
+    let container;
+
     var bounds = new google.maps.LatLngBounds(
         new google.maps.LatLng(50,50),
         new google.maps.LatLng(60,60)
     );
 
-    before(function() {
-        fixture.setBase('Tests/Frontend/fixture');
-    });
-
     beforeEach(function() {
-        fixture.load('map.html');
+        container = document.createElement('div');
+        container.innerHTML = html;
+        document.body.appendChild(container);
         locationManager = new LocationManager({
             mapContainer: '#map',
             markerContainer: '#list',
@@ -42,6 +50,14 @@ describe('AutocompletedSearchController', function() {
             field: '#search'
         });
         locationManager.addController(controller);
+    });
+
+    afterEach(() => {
+        if (container) {
+            container.innerHTML = '';
+            container.remove();
+            container = null;
+        }
     });
 
 

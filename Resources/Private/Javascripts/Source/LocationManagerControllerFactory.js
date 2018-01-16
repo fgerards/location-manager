@@ -1,4 +1,4 @@
-class LocationManagerControllerFactory {
+export class LocationManagerControllerFactory {
 
     /**
      * Map of all of the constructors for the factory

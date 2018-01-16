@@ -1,3 +1,11 @@
+import html from '../../fixture/map.html';
+import { ClickToEnableController } from "../../../../Resources/Private/Javascripts/Source/Controller/ClickToEnableController";
+import { LocationManager } from "../../../../Resources/Private/Javascripts/Source/LocationManager";
+import { assert } from 'chai'
+import sinon from 'sinon';
+import $ from 'jquery';
+
+
 describe('ClickToEnable', function() {
     /**
      * @type {LocationManager}
@@ -9,12 +17,12 @@ describe('ClickToEnable', function() {
      */
     var controller;
 
-    before(function() {
-        fixture.setBase('Tests/Frontend/fixture');
-    });
+    let container;
 
     beforeEach(function() {
-        fixture.load('map.html');
+        container = document.createElement('div');
+        container.innerHTML = html;
+        document.body.appendChild(container);
         locationManager = new LocationManager({
             mapContainer: '#map',
             markerContainer: '#list',
@@ -37,6 +45,14 @@ describe('ClickToEnable', function() {
             disabled: '#clickToEnable-disabled'
         });
         locationManager.addController(controller);
+    });
+
+    afterEach(() => {
+        if (container) {
+            container.innerHTML = '';
+            container.remove();
+            container = null;
+        }
     });
 
     it ('should select the string passed', function() {

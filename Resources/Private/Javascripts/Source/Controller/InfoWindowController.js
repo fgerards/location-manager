@@ -9,7 +9,7 @@
  * @implements LocationManagerControllerInterface
  */
 
-class InfoWindowController {
+export class InfoWindowController {
 
     /**
      * @type {google.maps.InfoWindow}
@@ -99,5 +99,3 @@ class InfoWindowController {
     preprocess() {}
 
 }
-
-LocationManagerControllerFactory.register('infoWindow', InfoWindowController);

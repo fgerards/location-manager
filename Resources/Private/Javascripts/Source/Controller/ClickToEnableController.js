@@ -10,7 +10,7 @@
  * @implements LocationManagerControllerInterface
  */
 
-class ClickToEnableController {
+export class ClickToEnableController {
 
     /**
      * @type {ClickToEnableController~settings}
@@ -71,5 +71,3 @@ class ClickToEnableController {
     preprocess() {}
 
 }
-
-LocationManagerControllerFactory.register('clickToEnable', ClickToEnableController);

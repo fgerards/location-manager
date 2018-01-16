@@ -5,13 +5,16 @@
  * @property {number} [expand = 0] - The amount to expand the search bounds by
  */
 
+import { MapsHelper } from "../MapsHelper";
+import { HideMapOnMobileController } from "./HideMapOnMobileController";
+
 /**
  * Handles the search using google maps Autocomplete
  *
  * @implements LocationManagerControllerInterface
  */
 
-class AutocompletedSearchController {
+export class AutocompletedSearchController {
 
     /**
      * @type {AutocompletedSearchController~settings}
@@ -127,5 +130,3 @@ class AutocompletedSearchController {
 
 
 }
-
-LocationManagerControllerFactory.register('autocompletedSearch', AutocompletedSearchController);

@@ -3,6 +3,8 @@
  * @property {string} [linkSelector = '.tx-locationmanager-show'] - The amount of throttling to apply
  */
 
+import { InfoWindowController } from "./InfoWindowController";
+
 /**
  * Zooms to a marker whenever the showlink is being clicked.
  * Also opens the infowindow, if the infowindow controller is being used
@@ -10,7 +12,7 @@
  * @implements LocationManagerControllerInterface
  */
 
-class ShowOnClickController {
+export class ShowOnClickController {
 
     /**
      * @type {ShowOnClickController~settings}
@@ -69,5 +71,3 @@ class ShowOnClickController {
     preprocess() {}
 
 }
-
-LocationManagerControllerFactory.register('showOnClick', ShowOnClickController);

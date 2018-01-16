@@ -1,3 +1,9 @@
+import html from '../../fixture/map.html'
+import { assert } from 'chai'
+import { RefreshListOnMoveController } from "../../../../Resources/Private/Javascripts/Source/Controller/RefreshListOnMoveController";
+import { LocationManager } from "../../../../Resources/Private/Javascripts/Source/LocationManager";
+import sinon from 'sinon';
+
 describe('RefreshListOnMoveController', function() {
 
     /**
@@ -10,12 +16,13 @@ describe('RefreshListOnMoveController', function() {
      */
     var controller;
 
-    before(function() {
-        fixture.setBase('Tests/Frontend/fixture');
-    });
+    let container;
 
     beforeEach(function() {
-        fixture.load('map.html');
+        container = document.createElement('div');
+        container.innerHTML = html;
+        document.body.appendChild(container);
+
         locationManager = new LocationManager({
             mapContainer: '#map',
             markerContainer: '#list',
@@ -39,6 +46,14 @@ describe('RefreshListOnMoveController', function() {
         locationManager.addController(controller);
     });
 
+    afterEach(() => {
+        if (container) {
+            container.innerHTML = '';
+            container.remove();
+            container = null;
+        }
+    });
+
     it ('should show all markers, if they are visible', function(done) {
         // zoom all the way out to show all of the markers
         locationManager.map.setZoom(1);
@@ -51,7 +66,7 @@ describe('RefreshListOnMoveController', function() {
             done();
         }, 1500);
 
-    });
+    }).timeout(5000);
 
     it ('should hide all markers in the list, if they are not visible', function(done) {
         // zoom to pole

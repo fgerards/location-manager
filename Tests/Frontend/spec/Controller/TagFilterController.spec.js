@@ -1,3 +1,10 @@
+import fixture from '../../fixture/map.html';
+import { LocationManager } from "../../../../Resources/Private/Javascripts/Source/LocationManager";
+import { TagFilterController } from "../../../../Resources/Private/Javascripts/Source/Controller/TagFilterController";
+import sinon from 'sinon';
+import { assert } from 'chai';
+import $ from 'jquery';
+
 describe('TagFilterController', function() {
     this.timeout(6000);
 
@@ -11,12 +18,12 @@ describe('TagFilterController', function() {
      */
     var controller;
 
-    before(function() {
-        fixture.setBase('Tests/Frontend/fixture');
-    });
+    let container;
 
     beforeEach(function() {
-        fixture.load('map.html');
+        container = document.createElement('div');
+        container.innerHTML = fixture;
+        document.body.appendChild(container);
         locationManager = new LocationManager({
             mapContainer: '#map',
             markerContainer: '#list',
@@ -42,6 +49,14 @@ describe('TagFilterController', function() {
             throttle: 0
         });
         locationManager.addController(controller);
+    });
+
+    afterEach(() => {
+        if (container) {
+            container.innerHTML = '';
+            container.remove();
+            container = null;
+        }
     });
 
 

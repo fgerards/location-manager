@@ -1,3 +1,7 @@
+import { LocationManagerControllerFactory } from "../../../Resources/Private/Javascripts/Source/LocationManagerControllerFactory";
+import { assert } from 'chai';
+import sinon from 'sinon'
+
 describe('LocationmanagerControllerFactory', function() {
 
     it ('should add constructors', function() {

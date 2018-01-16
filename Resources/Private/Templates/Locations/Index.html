@@ -4,7 +4,7 @@
     <f:debug>{_all}</f:debug>
 </f:if>
 
-<div class="location-manager">
+<div class="location-manager" data-location-manager="{configuration -> n:format.json()}">
 
     <div class="location-manager__map-wrapper">
         <div id="{ids.map}" class="location-manager__map"></div>
@@ -61,6 +61,4 @@
             <f:render partial="Location" arguments="{ location: location }"/>
         </f:for>
     </ul>
-
-    <f:render partial="JavascriptInit" arguments="{_all}"/>
 </div>

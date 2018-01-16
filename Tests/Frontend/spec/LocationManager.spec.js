@@ -1,16 +1,23 @@
+import { LocationManager } from "../../../Resources/Private/Javascripts/Source/LocationManager";
+import fixture from '../fixture/map.html';
+import { LocationManagerControllerFactory } from "../../../Resources/Private/Javascripts/Source/LocationManagerControllerFactory";
+import { assert } from 'chai';
+import { LocationManagerControllerStub } from "../stub/LocationManagerControllerStub";
+import sinon from 'sinon';
+
+
 describe('LocationManager', function() {
 
     /**
      * @type {LocationManager}
      */
-    var locationManager;
-
-    before(function() {
-        fixture.setBase('Tests/Frontend/fixture');
-    });
+    let locationManager;
+    let container;
 
     beforeEach(function() {
-        fixture.load('map.html');
+        container = document.createElement('div');
+        container.innerHTML = fixture;
+        document.body.appendChild(container);
         locationManager = new LocationManager({
             mapContainer: '#map',
             markerContainer: '#list',
@@ -27,6 +34,14 @@ describe('LocationManager', function() {
                 }]
             }
         });
+    });
+
+    afterEach(() => {
+        if (container) {
+            container.innerHTML = '';
+            container.remove();
+            container = null;
+        }
     });
 
     it ('should initialize a google map', function() {

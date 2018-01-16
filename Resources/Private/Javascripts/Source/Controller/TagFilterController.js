@@ -23,6 +23,9 @@
  */
 
 
+import { throttle } from "../EventHelpers";
+import { RefreshListOnMoveController } from "./RefreshListOnMoveController";
+
 /**
  * Handles the tag filter.
  * Because of the nature of this controller, it should be included as one of the first Controllers
@@ -30,7 +33,7 @@
  * @implements LocationManagerControllerInterface
  */
 
-class TagFilterController {
+export class TagFilterController {
 
 
     /**
@@ -70,7 +73,7 @@ class TagFilterController {
 
         this.settings = settings;
 
-        this._hideTagsInListThrottled = EventHelpers.throttle(this.updateTagsInList, this.settings.throttle, this);
+        this._hideTagsInListThrottled = throttle(() => this.updateTagsInList, this.settings.throttle);
     }
 
     /**
@@ -273,5 +276,3 @@ class TagFilterController {
      */
     _hideTagsInListThrottled;
 }
-
-LocationManagerControllerFactory.register('tagFilter', TagFilterController);

@@ -1,3 +1,10 @@
+import html from '../../fixture/map.html';
+import { LocationManager } from "../../../../Resources/Private/Javascripts/Source/LocationManager";
+import { InfoWindowController } from "../../../../Resources/Private/Javascripts/Source/Controller/InfoWindowController";
+import { assert } from 'chai';
+import sinon from 'sinon';
+
+
 describe('InfoWindowController', function() {
     /**
      * @type {LocationManager}
@@ -15,12 +22,12 @@ describe('InfoWindowController', function() {
      */
     var marker;
 
-    before(function() {
-        fixture.setBase('Tests/Frontend/fixture');
-    });
+    let container;
 
     beforeEach(function() {
-        fixture.load('map.html');
+        container = document.createElement('div');
+        container.innerHTML = html;
+        document.body.appendChild(container);
         locationManager = new LocationManager({
             mapContainer: '#map',
             markerContainer: '#list',
@@ -48,6 +55,14 @@ describe('InfoWindowController', function() {
         var index = Math.floor(Math.random() * locationManager.marker.length);
         marker = locationManager.marker[index];
     });
+
+    afterEach(() => {
+        if (container) {
+            container.innerHTML = '';
+            container.remove();
+            container = null;
+        }
+    })
 
     it ('should open an infowindow on the given marker', function() {
         sinon.spy(controller.infoWindow, 'open');
