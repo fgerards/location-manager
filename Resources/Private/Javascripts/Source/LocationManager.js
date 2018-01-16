@@ -150,10 +150,10 @@ export class LocationManager {
     updateList() {
         this._log('updateList');
 
-        let child;
+        let child = this._settings.markerContainer.firstChild;
         while (child) {
-            child = this._settings.markerContainer.firstChild;
             this._settings.markerContainer.removeChild(child);
+            child = this._settings.markerContainer.firstChild;
         }
 
         this._getProcessedMarker().forEach(marker => {
