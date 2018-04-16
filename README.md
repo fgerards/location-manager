@@ -1,6 +1,8 @@
 # Location Manager
 A TYPO3 extension which provides features for handling, visualizing, and filtering locations.
 
+**THIS EXTENSION IS NOT MAINTAINED ANYMORE!** We do not provide support for this code anymore. If you want to take over this project, feel free to fork or re-upload it under your own namespace.
+
 [![Build Status](https://travis-ci.org/nimius/location_manager.svg?branch=master)](https://travis-ci.org/nimius/location_manager)
 
 
@@ -10,7 +12,7 @@ and allows interchanging functionality with already shipped or custom methods to
 
 
 ## Installation
-Workshops requires some basic TypoScript to work properly. Include the static extension template into your template and you're set. 
+Workshops requires some basic TypoScript to work properly. Include the static extension template into your template and you're set.
 If you don't include the static TypoScript, TYPO3 will not include the Javascript Library into the Frontend.
 
 
@@ -30,7 +32,7 @@ be rendered separately from the normal list and which will not be affected by an
 
 ### Optional Features
 
-In order to keep everything as minimalistic as possible, advanced features are disabled by default. 
+In order to keep everything as minimalistic as possible, advanced features are disabled by default.
 Have a look at the extension configuration inside the extension manager to enable/disable features.
 
 
