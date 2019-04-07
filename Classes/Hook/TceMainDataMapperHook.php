@@ -47,7 +47,7 @@ class TceMainDataMapperHook
         }
 
         if (!is_numeric($uid)) {
-            $uid = $reference->substNEWwithIDs[$uid];
+            $uid = $dataHandler->substNEWwithIDs[$uid];
         }
 
         $this->geocodeCoordinates($table, $uid);
@@ -100,7 +100,7 @@ class TceMainDataMapperHook
             return;
         }
 
-        $geoService = ObjectUtility::get('B13\Geocoding\Service\GeoService');
+        $geoService = ObjectUtility::get(\B13\Geocoding\Service\GeoService::class);
         $street = $record['address'];
         if (!empty($record['name'])) {
             $street = $record['name'] . ', ' . $street;
